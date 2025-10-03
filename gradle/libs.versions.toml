@@ -1,0 +1,113 @@
+[versions]
+# Toolchain
+agp = "8.13.0"                               # Android Gradle Plugin
+blurview = "1.6.6"
+kotlin = "2.2.10"                            # Kotlin (latest stable) :contentReference[oaicite:2]{index=2}
+ksp = "2.2.10-2.0.2"                         # KSP plugin compatible 2.2.10 :contentReference[oaicite:3]{index=3}
+
+# Core Jetpack
+coreKtx = "1.17.0"                           # Core KTX (stable channel list) :contentReference[oaicite:4]{index=4}
+appcompat = "1.7.1"                          # AppCompat (2025-06-04) :contentReference[oaicite:5]{index=5}
+material = "1.13.0"                          # Material Components (stable) :contentReference[oaicite:6]{index=6}
+constraintlayout = "2.2.1"                   # ConstraintLayout latest stable (AndroidX versions page) :contentReference[oaicite:7]{index=7}
+activity = "1.11.0"                          # Activity (stable channel) :contentReference[oaicite:8]{index=8}
+lifecycle = "2.9.4"                          # Lifecycle (stable channel) :contentReference[oaicite:9]{index=9}
+navigation = "2.9.4"                         # Navigation (stable) :contentReference[oaicite:10]{index=10}
+datastore = "1.1.7"                          # DataStore (stable channel) :contentReference[oaicite:11]{index=11}
+paging = "3.3.6"                             # Paging (latest stable before 3.4 alpha) :contentReference[oaicite:12]{index=12}
+work = "2.10.4"                              # WorkManager (2025-07-30) :contentReference[oaicite:13]{index=13}
+room = "2.8.0"                               # Room (stable as of 2025-08-27) :contentReference[oaicite:14]{index=14}
+
+# KotlinX
+coroutines = "1.10.2"                        # Coroutines (2025-04-08) :contentReference[oaicite:15]{index=15}
+serialization = "1.9.0"                      # kotlinx-serialization (2025-08 docs) :contentReference[oaicite:16]{index=16}
+
+# Networking
+retrofit = "3.0.0"                           # Retrofit 3 stable (2025-05-15) :contentReference[oaicite:17]{index=17}
+okhttp = "5.1.0"                             # OkHttp (2025-07-07) :contentReference[oaicite:18]{index=18}
+
+# Image loading
+coil3 = "3.3.0"                              # Coil 3 (2025-07-22) :contentReference[oaicite:19]{index=19}
+
+# DI
+hilt = "2.57.1"                              # Dagger/Hilt latest stable (Aug 2025) :contentReference[oaicite:20]{index=20}
+
+# Testing
+junit4 = "4.13.2"
+androidxTestJunit = "1.3.0"                  # AndroidX Test JUnit Ext (stable channel) :contentReference[oaicite:21]{index=21}
+espresso = "3.7.0"                           # Espresso (2025-07-30) :contentReference[oaicite:22]{index=22}
+google-services = "4.4.3"
+firebase-bom = "33.7.0"
+#firebaseFirestoreKtx = "26.0.1"
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+kotlin-android      = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-serialization= { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+ksp                 = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+hilt                = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+navigation-safeargs = { id = "androidx.navigation.safeargs.kotlin", version.ref = "navigation" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+google-services = { id = "com.google.gms:google-services", version = "4.4.3" }
+
+[libraries]
+# Core UI/XML
+androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
+androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
+blurview = { module = "com.eightbitlab:blurview", version.ref = "blurview" }
+material = { module = "com.google.android.material:material", version.ref = "material" }
+constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayout" }
+activity-ktx = { module = "androidx.activity:activity-ktx", version.ref = "activity" }
+
+# Lifecycle (MVVM)
+lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle" }
+lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
+lifecycle-livedata-ktx = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "lifecycle" }
+
+# Navigation
+navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigation" }
+navigation-ui-ktx       = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigation" }
+
+# DataStore
+datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastore" }
+datastore-core = { module = "androidx.datastore:datastore", version.ref = "datastore" }
+
+# Paging
+paging-runtime = { module = "androidx.paging:paging-runtime-ktx", version.ref = "paging" }
+
+# WorkManager
+work-runtime = { module = "androidx.work:work-runtime-ktx", version.ref = "work" }
+
+# Room (KSP)
+room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
+room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
+room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+
+# KotlinX
+kotlinx-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serialization" }
+
+# Networking
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+retrofit-serialization = { module = "com.squareup.retrofit2:converter-kotlinx-serialization", version.ref = "retrofit" } # Converter first-party :contentReference[oaicite:23]{index=23}
+okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
+okhttp-logging = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okhttp" }
+
+# Image loading
+coil3-core = { module = "io.coil-kt.coil3:coil", version.ref = "coil3" }
+coil3-okhttp = { module = "io.coil-kt.coil3:coil-network-okhttp", version.ref = "coil3" }
+
+# DI Hilt
+hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
+hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
+
+# Test
+junit = { module = "junit:junit", version.ref = "junit4" }
+androidx-test-junit = { module = "androidx.test.ext:junit", version.ref = "androidxTestJunit" }
+espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso" }
+# Firebase
+#firebase-firestore-ktx = { group = "com.google.firebase", name = "firebase-firestore-ktx", version.ref = "firebaseFirestoreKtx" }
+firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase-bom" }
+firebase-auth-ktx = { module = "com.google.firebase:firebase-auth-ktx" }
+firebase-firestore-ktx = { module = "com.google.firebase:firebase-firestore-ktx" }
+firebase-database = { module = "com.google.firebase:firebase-database" }

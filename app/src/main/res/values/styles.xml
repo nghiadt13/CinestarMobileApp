@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="ShapeAppearanceOverlay.MobileApp.RoundedButton" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/social_button_corner_radius</item>
+    </style>
+
+    <style name="Widget.MobileApp.SocialButton" parent="Widget.Material3.Button">
+        <item name="iconGravity">textStart</item>
+        <item name="iconPadding">@dimen/social_button_icon_padding</item>
+        <item name="iconTint">@null</item>
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.MobileApp.RoundedButton</item>
+    </style>
+</resources>

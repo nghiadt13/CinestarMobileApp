@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="social_button_corner_radius">16dp</dimen>
+    <dimen name="social_button_icon_size">24dp</dimen>
+    <dimen name="social_button_icon_padding">12dp</dimen>
+
+    <dimen name="margin_top_24"> 24dp </dimen>
+    <dimen name="margin_top_20"> 20dp </dimen>
+    <dimen name="margin_top_18"> 18dp </dimen>
+    <dimen name="margin_top_12"> 12dp </dimen>
+    <dimen name="margin_12"> 12dp </dimen>
+    <dimen name="margin_6">6dp</dimen>
+    <dimen name="margin_48"> 48dp </dimen>
+</resources>

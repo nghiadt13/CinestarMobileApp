@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="ImageIcon">Image Icon</string>
+    <string name="CinemasStar">CinemasStar </string>
+    <string name="hint">Let\'s dive into your account!</string>
+    <string name="google">Continue with Google</string>
+    <string name="facebook">Continue with Facebook</string>
+    <string name="twitter">Continue with Twitter</string>
+    <string name="instagram">Continue with Instagram</string>
+    <string name="or">OR </string>
+    <string name="back">Back </string>
+    <string name="setting">Setting  </string>
+    <string name="Welcome">Welcome Back  </string>
+    <string name="Notification_login">Please enter your email &amp; password to sign in </string>
+    <string name="RememberMe">Remember Me </string>
+    <string name="ForgotPassword">Forgot Password ? </string>
+    <string name="DontHaveAccount">Don\'t have an account ? Sign up</string>
+</resources>

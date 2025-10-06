@@ -11,11 +11,21 @@
         android:label="MobileApp"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.MobileApp"
-    >
+        android:theme="@style/Theme.MobileApp" >
 
         <activity
-            android:name=".feature.auth.ui.activity.LoginActivity"
+            android:name=".feature.auth.ui.activity.common.LoginWith3Party"
+            android:windowSoftInputMode="adjustPan"
+            android:exported="true"
+            android:theme="@style/Theme.MobileApp">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".feature.auth.ui.activity.common.LoginCommon"
             android:windowSoftInputMode="adjustPan"
             android:exported="true"
             android:theme="@style/Theme.MobileApp">

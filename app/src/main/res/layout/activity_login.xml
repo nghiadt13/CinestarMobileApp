@@ -5,19 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_horizontal_30"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.25" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_horizontal_90"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.9" />
+    <include layout="@layout/layout_common_guidelines" />
 
     <ImageView
         android:id="@+id/imageView_icon"
@@ -185,9 +173,9 @@
     </LinearLayout>
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonView_signin"
         android:layout_marginStart="@dimen/margin_top_12"
         style="@style/Widget.Material3.Button.OutlinedButton"
-        android:id="@+id/buttonView_signin"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Sign in with password"

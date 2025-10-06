@@ -4,33 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_horizontal_8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.08" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_horizontal_30"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.3" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_horizontal_85"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.85" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_horizontal_73"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.73" />
+    <include layout="@layout/layout_common_guidelines" />
 
     <ImageButton
         android:id="@+id/buttonView_backButton"
@@ -135,8 +109,11 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/email"
                 android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:ellipsize="end"
                 android:paddingStart="@dimen/margin_48"
                 />
+
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -166,13 +143,22 @@
             app:endIconMode="password_toggle"
             app:boxStrokeWidth="0dp"
             app:layout_constraintTop_toBottomOf="@id/textview_password"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             android:hint="@string/password"
+            app:hintAnimationEnabled="false"
             >
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textView_input_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:imeOptions="actionDone"
                 android:paddingStart="48dp"
+                android:inputType="textPassword"
+                android:ellipsize="end"
+                android:singleLine="true"
                 />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -210,27 +196,6 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <View
-        android:id="@+id/divider_73"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray"
-        app:layout_constraintTop_toTopOf="@id/guideline_horizontal_73"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:paddingStart="@dimen/margin_top_24"
-        android:paddingEnd="@dimen/margin_top_24"/>
-
-    <TextView
-        android:id="@+id/textView_signup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/DontHaveAccount"
-        app:layout_constraintTop_toBottomOf="@id/divider_73"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        />
-
     <com.google.android.material.button.MaterialButton
         android:layout_marginStart="@dimen/margin_top_12"
         style="@style/Widget.Material3.Button.OutlinedButton"
@@ -241,7 +206,7 @@
         android:textColor="@color/black"
         android:textStyle="bold"
         android:layout_marginTop="14dp"
-        app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_85"
+       app:layout_constraintBottom_toTopOf="@id/guideline_horizontal_90"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintWidth_percent="0.8"
@@ -249,4 +214,14 @@
         app:backgroundTint="@color/white"
         app:strokeColor="@color/black"
         app:strokeWidth="2dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_90"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="Don't have an account ? Sign up"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -22,6 +22,8 @@ class CompleteProfile : AppCompatActivity() {
     binding.inputFieldDateOfBirth.setOnClickListener {
         showDatePickerDialog(binding.inputFieldDateOfBirth)
     }
+
+        binding.buttonViewBackButton.setOnClickListener { finish() }
     }
 
     private fun showDatePickerDialog(dateInput: TextInputEditText) {

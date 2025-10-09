@@ -17,6 +17,8 @@ class SignUp : AppCompatActivity() {
          binding = ActivitySignUpCommonBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.buttonViewBackButton.setOnClickListener { finish() }
+
         binding.textViewSignIn.setClickablePart(
             fullText = "Already have an account ? Sign in",
             clickableText = "Sign in",
@@ -24,7 +26,7 @@ class SignUp : AppCompatActivity() {
             clickableColor = ContextCompat.getColor(this, R.color.orange),
             isBoldClickable = true
         ) {
-            startActivity(Intent(this, SignUp::class.java))
+            startActivity(Intent(this, LoginCommon::class.java))
         }
 
         binding.textViewTerm.setClickablePart(
@@ -34,7 +36,7 @@ class SignUp : AppCompatActivity() {
             clickableColor = ContextCompat.getColor(this, R.color.orange),
             isBoldClickable = true
         ) {
-            startActivity(Intent(this, SignUp::class.java))
+            startActivity(Intent(this, LoginCommon::class.java))
         }
 
 

@@ -11,4 +11,11 @@
         <item name="iconTint">@null</item>
         <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.MobileApp.RoundedButton</item>
     </style>
+
+
+        <style name="CircleImageView" parent="">
+            <item name="cornerFamily">rounded</item>
+            <item name="cornerSize">50%</item>
+        </style>
+
 </resources>

@@ -36,5 +36,11 @@ class SignUp : AppCompatActivity() {
         ) {
             startActivity(Intent(this, SignUp::class.java))
         }
+
+
+        binding.buttonViewSignUp.setOnClickListener {
+            val intent = Intent(this, CompleteProfile::class.java)
+            startActivity(intent)
+        }
     }
 }

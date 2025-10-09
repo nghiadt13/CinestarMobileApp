@@ -19,27 +19,6 @@
         android:layout_marginStart="@dimen/margin_12"
         />
 
-    <View
-        android:id="@+id/divider"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray"
-        app:layout_constraintTop_toTopOf="@id/guideline_horizontal_8"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="@string/setting"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/guideline_horizontal_8"
-        android:src="@drawable/ic_setting"
-        android:background="@android:color/transparent"
-        android:layout_marginEnd="@dimen/margin_12"
-        />
-
     <ImageView
         android:id="@+id/imageView_icon"
         android:layout_width="0dp"
@@ -196,7 +175,7 @@
     <com.google.android.material.button.MaterialButton
         android:layout_marginStart="@dimen/margin_top_12"
         style="@style/Widget.Material3.Button.OutlinedButton"
-        android:id="@+id/buttonView_sign_in"
+        android:id="@+id/buttonView_sign_up"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Sign up"

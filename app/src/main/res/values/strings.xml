@@ -24,5 +24,7 @@
     <string name="FullName">Full Name</string>
     <string name="PhoneNumber">Phone Number</string>
     <string name="DateOfBirth">Date Of Birth</string>
+    <string name="SignIn">Sign In</string>
+    <string name="signInWithPassword">Sign in with password</string>
 
 </resources>

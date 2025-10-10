@@ -1,15 +1,7 @@
 package com.example.mobileapp.feature.auth.ui.activity.common
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
-import android.text.SpannableString
-import android.text.Spanned
-import android.text.TextPaint
-import android.text.method.LinkMovementMethod
-import android.text.style.ClickableSpan
-import android.text.style.ForegroundColorSpan
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.mobileapp.R
@@ -39,5 +31,5 @@ class LoginWith3Party : AppCompatActivity() {
         ) {
             startActivity(Intent(this, SignUp::class.java))
         }
-    }
+    }  
 }

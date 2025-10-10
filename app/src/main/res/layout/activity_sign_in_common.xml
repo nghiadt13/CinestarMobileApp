@@ -19,8 +19,6 @@
         android:layout_marginStart="@dimen/margin_12"
         />
 
-
-
     <ImageView
         android:id="@+id/imageView_icon"
         android:layout_width="0dp"
@@ -94,6 +92,7 @@
                 android:maxLines="1"
                 android:ellipsize="end"
                 android:paddingStart="@dimen/margin_48"
+                android:paddingEnd="@dimen/margin_48"
                 android:paddingTop="@dimen/margin_16"
                 android:paddingBottom="@dimen/margin_16"
                 />
@@ -139,7 +138,8 @@
                 android:layout_height="wrap_content"
                 android:maxLines="1"
                 android:imeOptions="actionDone"
-                android:paddingStart="48dp"
+                android:paddingStart="@dimen/margin_48"
+                android:paddingEnd="@dimen/margin_48"
                 android:inputType="textPassword"
                 android:ellipsize="end"
                 android:singleLine="true"
@@ -188,7 +188,7 @@
         android:id="@+id/buttonView_sign_in"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Sign in"
+        android:text="@string/SignIn"
         android:textColor="@color/black"
         android:textStyle="bold"
         android:layout_marginTop="14dp"
@@ -209,6 +209,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:text="Don't have an account ? Sign up"
+        android:text="@string/DontHaveAccount"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>

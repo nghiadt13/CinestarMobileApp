@@ -5,6 +5,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class UserDto(
+
     @SerialName("id")
     val id: Long,
 

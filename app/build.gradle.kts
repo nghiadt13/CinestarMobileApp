@@ -79,6 +79,9 @@ dependencies {
     // DataStore
     implementation(libs.datastore.preferences)
     implementation(libs.datastore.core)
+    
+    // Security (EncryptedSharedPreferences)
+    implementation("androidx.security:security-crypto:1.1.0-alpha06")
 
     // Paging
     implementation(libs.paging.runtime)

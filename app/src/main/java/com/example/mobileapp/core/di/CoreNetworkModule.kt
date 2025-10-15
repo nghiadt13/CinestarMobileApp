@@ -16,16 +16,18 @@ import retrofit2.converter.kotlinx.serialization.asConverterFactory
 @Module
 @InstallIn(SingletonComponent::class)
 object CoreNetworkModule {
-    // For physical device: use your computer's IP address
-    // For emulator: use "http://10.0.2.2:8080/"
-    private const val BASE_URL = "http://10.206.199.198:8080/"
+
+    private const val BASE_URL = "http://10.206.199.104:8080/"
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(): OkHttpClient {
+    fun provideOkHttpClient(
+            authInterceptor: com.example.mobileapp.core.network.AuthInterceptor
+    ): OkHttpClient {
         val loggingInterceptor =
                 HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY }
         return OkHttpClient.Builder()
+                .addInterceptor(authInterceptor)
                 .addInterceptor(loggingInterceptor)
                 .connectTimeout(30, TimeUnit.SECONDS)
                 .readTimeout(30, TimeUnit.SECONDS)

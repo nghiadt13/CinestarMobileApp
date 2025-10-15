@@ -23,9 +23,9 @@ constructor(private val userApi: UserApi, private val authApi: AuthApi) : UserRe
         }
     }
 
-    override suspend fun login(email: String, password: String): Result<LoginResult> {
+    override suspend fun login(username: String, password: String): Result<LoginResult> {
         return try {
-            val request = LoginRequestDto(email = email, password = password)
+            val request = LoginRequestDto(username = username, password = password)
             val response = authApi.login(request)
             Result.success(response.toLoginResult())
         } catch (e: Exception) {

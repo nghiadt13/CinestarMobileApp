@@ -5,6 +5,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class LoginResponseDto(
-        @SerialName("token") val token: String,
-        @SerialName("user") val user: UserDto
+        @SerialName("success") val success: Boolean,
+        @SerialName("message") val message: String,
+        @SerialName("token") val token: String?,
+        @SerialName("user") val user: UserDto?
 )

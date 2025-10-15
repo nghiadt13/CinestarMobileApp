@@ -7,5 +7,5 @@ interface UserRepository {
 
     suspend fun getUsers(): Result<List<User>>
 
-    suspend fun login(email: String, password: String): Result<LoginResult>
+    suspend fun login(username: String, password: String): Result<LoginResult>
 }

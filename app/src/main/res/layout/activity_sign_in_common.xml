@@ -95,6 +95,7 @@
             >
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editText_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/email"
@@ -142,8 +143,8 @@
             >
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editText_password"
                 android:autofillHints="password"
-                android:id="@+id/textView_input_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:maxLines="1"

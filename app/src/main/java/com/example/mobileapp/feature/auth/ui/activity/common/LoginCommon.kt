@@ -78,25 +78,29 @@ class LoginCommon : AppCompatActivity() {
                             binding.progressBar.visibility = View.GONE
                             binding.buttonViewSignIn.isEnabled = true
 
-                            Toast.makeText(
-                                            this@LoginCommon,
-                                            "Welcome ${state.loginResult.user.displayName}!",
-                                            Toast.LENGTH_SHORT
-                                    )
-                                    .show()
+                            val user = state.loginResult.user
+                            if (user != null) {
+                                Toast.makeText(
+                                                this@LoginCommon,
+                                                "Welcome ${user.displayName}!",
+                                                Toast.LENGTH_SHORT
+                                        )
+                                        .show()
 
-                            val intent = Intent(this@LoginCommon, HomePage::class.java)
-                            startActivity(intent)
-                            finish()
+                                val intent = Intent(this@LoginCommon, HomePage::class.java)
+                                startActivity(intent)
+                                finish()
+                            }
                         }
+
                         is AuthState.Error -> {
                             binding.progressBar.visibility = View.GONE
                             binding.buttonViewSignIn.isEnabled = true
-                            Toast.makeText(
-                                            this@LoginCommon,
-                                            "Login Failed: ${state.message}",
-                                            Toast.LENGTH_LONG
-                                    )
+
+                            // Clear password field khi login thất bại
+                            binding.editTextPassword.text?.clear()
+
+                            Toast.makeText(this@LoginCommon, state.message, Toast.LENGTH_LONG)
                                     .show()
                         }
                         is AuthState.UsersLoaded -> {

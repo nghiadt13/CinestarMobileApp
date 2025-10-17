@@ -17,7 +17,7 @@ import retrofit2.converter.kotlinx.serialization.asConverterFactory
 @InstallIn(SingletonComponent::class)
 object CoreNetworkModule {
 
-    private const val BASE_URL = "http://10.206.199.104:8080/"
+    private const val BASE_URL = "http://10.206.199.14:8080/"
 
     @Provides
     @Singleton

@@ -26,5 +26,9 @@
     <string name="DateOfBirth">Date Of Birth</string>
     <string name="SignIn">Sign In</string>
     <string name="signInWithPassword">Sign in with password</string>
+    <string name="Avatar">Avatar</string>
+    <string name="CGV">CGV</string>
+    <string name="Ticket">Ticket</string>
+
 
 </resources>

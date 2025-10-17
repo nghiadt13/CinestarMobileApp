@@ -13,9 +13,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 @HiltViewModel
-class AuthViewModel
-@Inject
-constructor(
+class AuthViewModel @Inject constructor(
         private val getUserUseCase: UserUseCase,
         private val loginUseCase: LoginUseCase,
         private val tokenManager: TokenManager
@@ -29,21 +27,18 @@ constructor(
 
             loginUseCase(email, password)
                     .onSuccess { loginResult ->
-                        // Kiểm tra success field từ API response
                         if (loginResult.success &&
                                         loginResult.token != null &&
                                         loginResult.user != null
                         ) {
-                            // Lưu token vào EncryptedSharedPreferences
+
                             tokenManager.saveToken(loginResult.token)
                             _authState.value = AuthState.LoginSuccess(loginResult)
                         } else {
-                            // API trả về success = false
                             _authState.value = AuthState.Error(loginResult.message)
                         }
                     }
                     .onFailure { exception ->
-                        // Network error hoặc exception khác
                         _authState.value =
                                 AuthState.Error(exception.message ?: "Không thể kết nối đến server")
                     }

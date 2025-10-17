@@ -14,7 +14,7 @@ import com.example.mobileapp.R
 import com.example.mobileapp.databinding.ActivitySignInCommonBinding
 import com.example.mobileapp.feature.auth.ui.viewmodel.AuthState
 import com.example.mobileapp.feature.auth.ui.viewmodel.AuthViewModel
-import com.example.mobileapp.feature.homepage.ui.activity.common.HomePage
+import com.example.mobileapp.feature.homepage.ui.activity.common.HomePageActivity
 import com.example.mobileapp.ui.extension.setClickablePart
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -87,7 +87,7 @@ class LoginCommon : AppCompatActivity() {
                                         )
                                         .show()
 
-                                val intent = Intent(this@LoginCommon, HomePage::class.java)
+                                val intent = Intent(this@LoginCommon, HomePageActivity::class.java)
                                 startActivity(intent)
                                 finish()
                             }

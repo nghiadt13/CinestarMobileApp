@@ -127,5 +127,6 @@ dependencies {
     implementation(libs.firebase.firestore.ktx)
     implementation(libs.firebase.database)
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.10.2")
-
+    implementation("androidx.security:security-crypto:1.1.0-alpha06")
+    implementation("me.relex:circleindicator:2.1.6")
 }

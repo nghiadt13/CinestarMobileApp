@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="80dp"
+    android:viewportWidth="200"
+    android:viewportHeight="80">
+
+    <!-- Background -->
+    <path
+        android:fillColor="#1a1a1a"
+        android:pathData="M0,0 L200,0 L200,80 L0,80 Z"/>
+
+    <!-- Chữ C -->
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="8"
+        android:strokeLineCap="round"
+        android:fillColor="#00000000"
+        android:pathData="M 25,20 Q 15,20 15,30 L 15,50 Q 15,60 25,60 L 35,60 Q 40,60 40,55 L 40,48"/>
+
+    <!-- Chữ G - phần ngoài -->
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="8"
+        android:strokeLineCap="round"
+        android:fillColor="#00000000"
+        android:pathData="M 40,48 Q 40,60 50,60 L 65,60 Q 75,60 75,50 L 75,30 Q 75,20 65,20 L 50,20 Q 45,20 45,25"/>
+
+    <!-- Thanh ngang của G -->
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="8"
+        android:strokeLineCap="round"
+        android:pathData="M 65,45 L 75,45"/>
+
+    <!-- Chữ V -->
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="8"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:fillColor="#00000000"
+        android:pathData="M 82,20 L 100,60 L 118,20"/>
+
+    <!-- Dấu + -->
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="3"
+        android:strokeLineCap="round"
+        android:pathData="M 125,10 L 125,20"/>
+
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="3"
+        android:strokeLineCap="round"
+        android:pathData="M 120,15 L 130,15"/>
+
+</vector>

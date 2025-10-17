@@ -25,7 +25,7 @@
             android:exported="true"
             android:theme="@style/Theme.MobileApp">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -61,11 +61,12 @@
         </activity>
 
         <activity
-            android:name=".feature.homepage.ui.activity.common.HomePage"
+            android:name=".feature.homepage.ui.activity.common.HomePageActivity"
             android:windowSoftInputMode="adjustResize"
             android:exported="true"
             android:theme="@style/Theme.MobileApp">
             <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

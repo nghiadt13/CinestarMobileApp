@@ -13,6 +13,7 @@ import javax.inject.Inject
 class UserRepositoryImpl
 @Inject
 constructor(private val userApi: UserApi, private val authApi: AuthApi) : UserRepository {
+
     override suspend fun getUsers(): Result<List<User>> {
         return try {
             val userDtos = userApi.getUsers()
@@ -25,7 +26,9 @@ constructor(private val userApi: UserApi, private val authApi: AuthApi) : UserRe
 
     override suspend fun login(username: String, password: String): Result<LoginResult> {
         return try {
-            val request = LoginRequestDto(username = username, password = password)
+            val request = LoginRequestDto(
+                username = username,
+                password = password)
             val response = authApi.login(request)
             Result.success(response.toLoginResult())
         } catch (e: Exception) {

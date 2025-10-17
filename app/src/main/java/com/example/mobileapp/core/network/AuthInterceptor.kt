@@ -18,7 +18,6 @@ class AuthInterceptor @Inject constructor(private val tokenManager: TokenManager
                 } else {
                     originalRequest
                 }
-
         return chain.proceed(newRequest)
     }
 }

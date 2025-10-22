@@ -9,17 +9,17 @@ class HomePageAdapter(private val item: List<Int>) : RecyclerView.Adapter<Recycl
         parent: ViewGroup,
         viewType: Int
     ): RecyclerView.ViewHolder {
-        TODO("Not yet implemented")
+
     }
 
     override fun onBindViewHolder(
         holder: RecyclerView.ViewHolder,
         position: Int
     ) {
-        TODO("Not yet implemented")
+
     }
 
     override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+
     }
 }

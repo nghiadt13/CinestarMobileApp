@@ -12,6 +12,5 @@ class HomePageActivity : AppCompatActivity() {
         binding = ActivityHomepageBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
     }
 }

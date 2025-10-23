@@ -26,6 +26,7 @@ class CarouselAdapter(private val onItemClick: (CarouselItem) -> Unit) :
 
     inner class CarouselViewHolder(private val binding: ItemBannerImageBinding) :
             RecyclerView.ViewHolder(binding.root) {
+
         fun bind(item: CarouselItem) {
             Glide.with(binding.imageViewBanner.context)
                     .load(item.imageUrl)

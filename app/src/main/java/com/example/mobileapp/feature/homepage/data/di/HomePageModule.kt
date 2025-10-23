@@ -7,8 +7,8 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import retrofit2.Retrofit
 import javax.inject.Singleton
+import retrofit2.Retrofit
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -16,13 +16,13 @@ object HomePageModule {
 
     @Provides
     @Singleton
-    fun provideCarouselApi(retrofit: Retrofit) : CarouselApi {
+    fun provideCarouselApi(retrofit: Retrofit): CarouselApi {
         return retrofit.create(CarouselApi::class.java)
     }
 
     @Provides
     @Singleton
-    fun provideCarouselRepository(carouselApi: CarouselApi) : CarouselRepository {
+    fun provideCarouselRepository(carouselApi: CarouselApi): CarouselRepository {
         return CarouselRepositoryImpl(carouselApi)
     }
 }

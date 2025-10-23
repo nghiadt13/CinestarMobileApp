@@ -22,6 +22,8 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        
+        // Fix KSP cross-drive issue with Glide
     }
 
     buildTypes {
@@ -50,6 +52,12 @@ android {
         android.buildFeatures.buildConfig = true
     }
 }
+
+// Configure KSP to avoid cross-drive path issues
+ksp {
+    arg("room.schemaLocation", "$projectDir/schemas")
+}
+
 
 dependencies {
     // Core UI
@@ -100,10 +108,16 @@ dependencies {
     implementation(libs.okhttp.logging)
     implementation(libs.retrofit)
     implementation(libs.retrofit.serialization)
+    implementation("com.squareup.retrofit2:converter-gson:2.11.0")
 
     // Image loading
     implementation(libs.coil3.core)
     implementation(libs.coil3.okhttp)
+    
+    // Glide
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+    ksp("com.github.bumptech.glide:ksp:4.16.0")
+    implementation("com.github.bumptech.glide:okhttp3-integration:4.16.0")
 
     // DI Hilt
     implementation(libs.hilt.android)

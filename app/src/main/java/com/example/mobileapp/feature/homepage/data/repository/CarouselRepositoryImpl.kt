@@ -12,13 +12,8 @@ class CarouselRepositoryImpl @Inject constructor(private val carouselApi: Carous
     override suspend fun getLastestCarousel(): Result<List<CarouselItem>> {
         return try {
             val response = carouselApi.getLastestCarousel()
-
-            if (response.success && response.data.isNotEmpty()) {
-                val carouselItems = CarouselMapper.toDomainList(response.data)
-                Result.success(carouselItems)
-            } else {
-                Result.failure(Exception(response.message))
-            }
+            val carouselItems = CarouselMapper.toDomainList(response)
+            Result.success(carouselItems)
         } catch (e: Exception) {
             Result.failure(e)
         }

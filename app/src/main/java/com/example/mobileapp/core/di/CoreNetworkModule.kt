@@ -1,23 +1,29 @@
 package com.example.mobileapp.core.di
 
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
-import kotlinx.serialization.json.Json
-import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.converter.kotlinx.serialization.asConverterFactory
+import retrofit2.converter.gson.GsonConverterFactory
 
 @Module
 @InstallIn(SingletonComponent::class)
 object CoreNetworkModule {
 
-    private const val BASE_URL = "http://10.206.199.14:8080/"
+    private const val BASE_URL = "http://10.85.17.103:8080/"
+
+    @Provides
+    @Singleton
+    fun provideGson(): Gson {
+        return GsonBuilder().serializeNulls().create()
+    }
 
     @Provides
     @Singleton
@@ -37,15 +43,11 @@ object CoreNetworkModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
-        val json = Json {
-            ignoreUnknownKeys = true
-            isLenient = true
-        }
+    fun provideRetrofit(okHttpClient: OkHttpClient, gson: Gson): Retrofit {
         return Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .client(okHttpClient)
-                .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .build()
     }
 }

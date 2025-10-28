@@ -6,4 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:scaleType="centerCrop"
-    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MobileApp.RoundedButton" />
+    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MobileApp.RoundedButton"
+
+    />

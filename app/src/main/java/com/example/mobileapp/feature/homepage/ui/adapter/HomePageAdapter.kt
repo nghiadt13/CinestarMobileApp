@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mobileapp.databinding.ItemHomeCarouselBinding
+import com.example.mobileapp.databinding.FragmentHomeCarouselBinding
 import com.example.mobileapp.feature.homepage.domain.model.CarouselItem
 
 class HomePageAdapter(private val onCarouselItemClick: (CarouselItem) -> Unit) :
@@ -13,11 +13,13 @@ class HomePageAdapter(private val onCarouselItemClick: (CarouselItem) -> Unit) :
 
     companion object {
         private const val VIEW_TYPE_CAROUSEL = 1
+        private const val VIEW_TYPE_MOVIE = 1
     }
 
     override fun getItemViewType(position: Int): Int {
         return when (getItem(position)) {
             is HomeItem.CarouselSection -> VIEW_TYPE_CAROUSEL
+            else -> throw IllegalArgumentException("Unknown item")
         }
     }
 
@@ -25,7 +27,7 @@ class HomePageAdapter(private val onCarouselItemClick: (CarouselItem) -> Unit) :
         return when (viewType) {
             VIEW_TYPE_CAROUSEL -> {
                 val binding =
-                        ItemHomeCarouselBinding.inflate(
+                        FragmentHomeCarouselBinding.inflate(
                                 LayoutInflater.from(parent.context),
                                 parent,
                                 false
@@ -45,7 +47,7 @@ class HomePageAdapter(private val onCarouselItemClick: (CarouselItem) -> Unit) :
         }
     }
 
-    inner class CarouselViewHolder(private val binding: ItemHomeCarouselBinding) :
+    inner class CarouselViewHolder(private val binding: FragmentHomeCarouselBinding) :
             RecyclerView.ViewHolder(binding.root) {
 
         private val carouselAdapter = CarouselAdapter { carouselItem ->

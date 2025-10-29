@@ -5,20 +5,17 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mobileapp.feature.homepage.domain.model.CarouselItem
 import com.example.mobileapp.feature.homepage.domain.usecase.CarouselUseCase
-import com.example.mobileapp.feature.homepage.domain.usecase.MovieUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @HiltViewModel
-class HomePageViewModel @Inject constructor(
-    private val carouselUseCase: CarouselUseCase,
-) : ViewModel() {
+class CarouselViewModel @Inject constructor(private val carouselUseCase: CarouselUseCase) : ViewModel() {
     private val _carouselItem = MutableStateFlow<List<CarouselItem>>(emptyList())
-    val carouselItem: StateFlow<List<CarouselItem>> = _carouselItem.asStateFlow()
+    val carouselItem : StateFlow<List<CarouselItem>> = _carouselItem.asStateFlow()
 
     private val _isLoading = MutableStateFlow(false)
     val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
@@ -31,23 +28,23 @@ class HomePageViewModel @Inject constructor(
     }
 
     private fun fetchCarouselItem() {
-        viewModelScope.launch {
-            _isLoading.value = true
-            _error.value = null
+            viewModelScope.launch {
+                _isLoading.value = true
+                _error.value = null
 
-            Log.d("HomePageViewModel", "Fetching carousel items...")
+                Log.d("Carousel View Model", "Fetching carousel items")
 
-            carouselUseCase()
-                    .onSuccess { items ->
-                        Log.d("HomePageViewModel", "Success: Received ${items.size} items")
+                carouselUseCase()
+                    .onSuccess {
+                        items ->
+                        Log.d("Carousel View Model","Received ${items.size} items")
                         _carouselItem.value = items
                     }
-                    .onFailure { exception ->
-                        Log.e("HomePageViewModel", "Error fetching carousel", exception)
-                        _error.value = exception.message ?: "Unknown error"
+                    .onFailure {
+                        exception ->
+                        Log.e("Carousel View Model", "Error while fetching ", exception)
+                        _error.value = exception.message?: "Unknown Error"
                     }
-
-            _isLoading.value = false
-        }
+            }
     }
 }

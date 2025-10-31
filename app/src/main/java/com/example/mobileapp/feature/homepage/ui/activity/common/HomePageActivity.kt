@@ -11,14 +11,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mobileapp.databinding.ActivityHomepageBinding
 import com.example.mobileapp.feature.homepage.ui.adapter.HomeItem
 import com.example.mobileapp.feature.homepage.ui.adapter.HomePageAdapter
-import com.example.mobileapp.feature.homepage.ui.viewmodel.HomePageViewModel
+import com.example.mobileapp.feature.homepage.ui.viewmodel.CarouselViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class HomePageActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomepageBinding
-    private val viewModel: HomePageViewModel by viewModels()
+    private val carouselViewModel: CarouselViewModel by viewModels()
     private lateinit var homePageAdapter: HomePageAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,7 +49,7 @@ class HomePageActivity : AppCompatActivity() {
     private fun observeViewModel() {
         // Observe loading state
         lifecycleScope.launch {
-            viewModel.isLoading.collect { isLoading ->
+            carouselViewModel.isLoading.collect { isLoading ->
                 binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
                 Log.d("HomePageActivity", "Loading state: $isLoading")
             }
@@ -57,7 +57,7 @@ class HomePageActivity : AppCompatActivity() {
         
         // Observe carousel items
         lifecycleScope.launch {
-            viewModel.carouselItem.collect { carouselItems ->
+            carouselViewModel.carouselItem.collect { carouselItems ->
                 Log.d("HomePageActivity", "Received ${carouselItems.size} carousel items")
                 
                 if (carouselItems.isNotEmpty()) {
@@ -72,7 +72,7 @@ class HomePageActivity : AppCompatActivity() {
         
         // Observe errors
         lifecycleScope.launch {
-            viewModel.error.collect { error ->
+            carouselViewModel.error.collect { error ->
                 error?.let {
                     Toast.makeText(this@HomePageActivity, "Error: $it", Toast.LENGTH_LONG).show()
                     Log.e("HomePageActivity", "Error: $it")

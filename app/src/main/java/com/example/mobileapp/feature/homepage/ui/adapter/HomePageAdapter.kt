@@ -6,19 +6,23 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobileapp.databinding.FragmentHomeCarouselBinding
+import com.example.mobileapp.databinding.FragmentHomeMovieBinding
 import com.example.mobileapp.feature.homepage.domain.model.CarouselItem
+import com.example.mobileapp.feature.homepage.domain.model.MovieItem
 
 class HomePageAdapter(private val onCarouselItemClick: (CarouselItem) -> Unit) :
         ListAdapter<HomeItem, RecyclerView.ViewHolder>(HomeItemDiffCallBack()) {
 
     companion object {
         private const val VIEW_TYPE_CAROUSEL = 1
-        private const val VIEW_TYPE_MOVIE = 1
+        private const val VIEW_TYPE_MOVIE = 2
     }
 
     override fun getItemViewType(position: Int): Int {
         return when (getItem(position)) {
             is HomeItem.CarouselSection -> VIEW_TYPE_CAROUSEL
+            is HomeItem.MovieListSection -> VIEW_TYPE_MOVIE
+
             else -> throw IllegalArgumentException("Unknown item")
         }
     }
@@ -27,13 +31,15 @@ class HomePageAdapter(private val onCarouselItemClick: (CarouselItem) -> Unit) :
         return when (viewType) {
             VIEW_TYPE_CAROUSEL -> {
                 val binding =
-                        FragmentHomeCarouselBinding.inflate(
-                                LayoutInflater.from(parent.context),
-                                parent,
-                                false
-                        )
+                    FragmentHomeCarouselBinding.inflate(LayoutInflater.from(parent.context), parent, false)
                 CarouselViewHolder(binding)
             }
+
+            VIEW_TYPE_MOVIE -> {
+                val binding = FragmentHomeMovieBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+                MovieSectionViewHolder(binding)
+            }
+
             else -> throw IllegalArgumentException("Unknown view type: $viewType")
         }
     }
@@ -44,11 +50,15 @@ class HomePageAdapter(private val onCarouselItemClick: (CarouselItem) -> Unit) :
                 val item = getItem(position) as HomeItem.CarouselSection
                 holder.bind(item.items)
             }
+
+            is MovieSectionViewHolder -> {
+                val movieItem = getItem(position) as HomeItem.MovieListSection
+                holder.bind(movieItem.items)
+            }
         }
     }
 
-    inner class CarouselViewHolder(private val binding: FragmentHomeCarouselBinding) :
-            RecyclerView.ViewHolder(binding.root) {
+    inner class CarouselViewHolder(private val binding: FragmentHomeCarouselBinding) : RecyclerView.ViewHolder(binding.root) {
 
         private val carouselAdapter = CarouselAdapter { carouselItem ->
             onCarouselItemClick(carouselItem)
@@ -93,11 +103,29 @@ class HomePageAdapter(private val onCarouselItemClick: (CarouselItem) -> Unit) :
         }
     }
 
+    inner class MovieSectionViewHolder(private val binding: FragmentHomeMovieBinding) : RecyclerView.ViewHolder(binding.root) {
+        private val movieAdapter = MovieAdapter {
+
+        }
+
+        init {
+
+        }
+
+        fun bind(movieItems : List<MovieItem>) {
+            movieAdapter.submitList(movieItems)
+        }
+    }
+
     private class HomeItemDiffCallBack : DiffUtil.ItemCallback<HomeItem>() {
         override fun areItemsTheSame(oldItem: HomeItem, newItem: HomeItem): Boolean {
             return when {
                 oldItem is HomeItem.CarouselSection && newItem is HomeItem.CarouselSection ->
                         oldItem.items.firstOrNull()?.id == newItem.items.firstOrNull()?.id
+
+                oldItem is HomeItem.MovieListSection && newItem is HomeItem.MovieListSection ->
+                    oldItem.items.firstOrNull()?.id == newItem.items.firstOrNull()?.id
+
                 else -> false
             }
         }

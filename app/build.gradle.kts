@@ -100,6 +100,13 @@ dependencies {
     // Room (KSP)
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
+    implementation(libs.androidx.runtime.saved.instance.state)
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.compose.ui.graphics)
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
+    debugImplementation(libs.androidx.compose.ui.tooling)
+    debugImplementation(libs.androidx.compose.ui.test.manifest)
 //    implementation(libs.firebase.firestore.ktx)
     ksp(libs.room.compiler)
 

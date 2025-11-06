@@ -1,77 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:enableOnBackInvokedCallback="true"
         android:name=".MainApplication"
         android:allowBackup="true"
-        android:usesCleartextTraffic="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
-        android:networkSecurityConfig="@xml/network_security_config"
+        android:enableOnBackInvokedCallback="true"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="MobileApp"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MobileApp"
+        android:usesCleartextTraffic="true"
         tools:targetApi="33">
 
         <activity
             android:name=".feature.auth.ui.activity.common.LoginWith3Party"
-            android:windowSoftInputMode="adjustPan"
             android:exported="true"
-            android:theme="@style/Theme.MobileApp">
+            android:theme="@style/Theme.MobileApp"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".feature.auth.ui.activity.common.LoginCommon"
-            android:windowSoftInputMode="adjustPan"
             android:exported="true"
-            android:theme="@style/Theme.MobileApp">
+            android:theme="@style/Theme.MobileApp"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".feature.auth.ui.activity.common.SignUp"
-            android:windowSoftInputMode="adjustPan"
             android:exported="true"
-            android:theme="@style/Theme.MobileApp">
+            android:theme="@style/Theme.MobileApp"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".feature.auth.ui.activity.common.CompleteProfile"
-            android:windowSoftInputMode="adjustResize"
             android:exported="true"
-            android:theme="@style/Theme.MobileApp">
+            android:theme="@style/Theme.MobileApp"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".feature.homepage.ui.activity.common.HomePageActivity"
-            android:windowSoftInputMode="adjustResize"
             android:exported="true"
-            android:theme="@style/Theme.MobileApp">
+            android:theme="@style/Theme.MobileApp"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+    </application>
 
-</application>
-
-    </manifest>
+</manifest>

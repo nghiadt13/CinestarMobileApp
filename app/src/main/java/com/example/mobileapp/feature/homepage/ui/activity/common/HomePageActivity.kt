@@ -2,24 +2,15 @@ package com.example.mobileapp.feature.homepage.ui.activity.common
 
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mobileapp.databinding.ActivityHomepageBinding
-import com.example.mobileapp.feature.homepage.ui.adapter.HomeItem
-import com.example.mobileapp.feature.homepage.ui.adapter.HomePageAdapter
-import com.example.mobileapp.feature.homepage.ui.viewmodel.CarouselViewModel
+import com.example.mobileapp.feature.homepage.ui.fragment.HomeFragment
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class HomePageActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomepageBinding
-    private val carouselViewModel: CarouselViewModel by viewModels()
-    private lateinit var homePageAdapter: HomePageAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,56 +19,33 @@ class HomePageActivity : AppCompatActivity() {
 
         Log.d("HomePageActivity", "onCreate called")
         
-        setupRecyclerView()
-        observeViewModel()
+        setupToolbar()
+        setupFragment(savedInstanceState)
     }
 
-    private fun setupRecyclerView() {
-        homePageAdapter = HomePageAdapter { carouselItem ->
-            Toast.makeText(this, "Clicked: ${carouselItem.title}", Toast.LENGTH_SHORT).show()
+    private fun setupToolbar() {
+        binding.imageViewAvatar.setOnClickListener {
+            Toast.makeText(this, "Avatar clicked", Toast.LENGTH_SHORT).show()
+            Log.d("HomePageActivity", "Avatar clicked")
         }
 
-        binding.recyclerView.apply {
-            layoutManager = LinearLayoutManager(this@HomePageActivity)
-            adapter = homePageAdapter
-            setHasFixedSize(true)
+        binding.imageButtonMyTicket.setOnClickListener {
+            Toast.makeText(this, "My Tickets", Toast.LENGTH_SHORT).show()
+            Log.d("HomePageActivity", "My Tickets clicked")
         }
-        
-        Log.d("HomePageActivity", "RecyclerView setup complete")
+
+        binding.imageButtonSetting.setOnClickListener {
+            Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show()
+            Log.d("HomePageActivity", "Settings clicked")
+        }
     }
 
-    private fun observeViewModel() {
-        // Observe loading state
-        lifecycleScope.launch {
-            carouselViewModel.isLoading.collect { isLoading ->
-                binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
-                Log.d("HomePageActivity", "Loading state: $isLoading")
-            }
-        }
-        
-        // Observe carousel items
-        lifecycleScope.launch {
-            carouselViewModel.carouselItem.collect { carouselItems ->
-                Log.d("HomePageActivity", "Received ${carouselItems.size} carousel items")
-                
-                if (carouselItems.isNotEmpty()) {
-                    val homeItems = listOf(HomeItem.CarouselSection(carouselItems))
-                    homePageAdapter.submitList(homeItems)
-                    Log.d("HomePageActivity", "Submitted carousel section with ${carouselItems.size} items")
-                } else {
-                    Log.d("HomePageActivity", "No carousel items to display")
-                }
-            }
-        }
-        
-        // Observe errors
-        lifecycleScope.launch {
-            carouselViewModel.error.collect { error ->
-                error?.let {
-                    Toast.makeText(this@HomePageActivity, "Error: $it", Toast.LENGTH_LONG).show()
-                    Log.e("HomePageActivity", "Error: $it")
-                }
-            }
+    private fun setupFragment(savedInstanceState: Bundle?) {
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .replace(binding.fragmentContainer.id, HomeFragment())
+                .commit()
+            Log.d("HomePageActivity", "HomeFragment loaded")
         }
     }
 }

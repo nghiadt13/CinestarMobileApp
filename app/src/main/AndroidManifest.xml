@@ -20,49 +20,12 @@
         tools:targetApi="33">
 
         <activity
-            android:name=".feature.auth.ui.activity.common.LoginWith3Party"
+            android:name=".MainActivity"
             android:exported="true"
             android:theme="@style/Theme.MobileApp"
-            android:windowSoftInputMode="adjustPan">
-            <intent-filter>
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".feature.auth.ui.activity.common.LoginCommon"
-            android:exported="true"
-            android:theme="@style/Theme.MobileApp"
-            android:windowSoftInputMode="adjustPan">
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".feature.auth.ui.activity.common.SignUp"
-            android:exported="true"
-            android:theme="@style/Theme.MobileApp"
-            android:windowSoftInputMode="adjustPan">
-            <intent-filter>
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".feature.auth.ui.activity.common.CompleteProfile"
-            android:exported="true"
-            android:theme="@style/Theme.MobileApp"
-            android:windowSoftInputMode="adjustResize">
-            <intent-filter>
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".feature.homepage.ui.activity.common.HomePageActivity"
-            android:exported="true"
-            android:theme="@style/Theme.MobileApp"
-            android:windowSoftInputMode="adjustResize">
-            <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

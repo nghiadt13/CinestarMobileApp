@@ -1,54 +1,50 @@
 package com.example.mobileapp.feature.homepage.ui.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
 import com.example.mobileapp.R
-import com.example.mobileapp.databinding.FragmentHomeBinding
+import com.example.mobileapp.databinding.FragmentHomepageBinding
 import dagger.hilt.android.AndroidEntryPoint
 
-/**
- * Main coordinator fragment for homepage
- * Chỉ chứa các child fragments, không quản lý business logic
- * Sử dụng ViewBinding để access views
- */
 @AndroidEntryPoint
-class HomeFragment : Fragment() {
-
-    // ViewBinding
-    private var _binding: FragmentHomeBinding? = null
-    private val binding get() = _binding!!
+class HomePageFragment : Fragment() {
+    private var _binding: FragmentHomepageBinding? = null
+    private val binding
+        get() = _binding!!
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        _binding = FragmentHomepageBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (savedInstanceState == null) {
-            setupFragments()
-        }
-
+        setupBottomNavigation()
     }
 
-    private fun setupFragments() {
-        // Chỉ setup fragments lần đầu tiên (tránh duplicate khi rotate)
-            childFragmentManager.beginTransaction()
-                .replace(R.id.carousel_container, CarouselFragment())
-                .replace(R.id.movie_container, MovieFragment())
-                .commit()
+    private fun setupBottomNavigation() {
+        val navHostFragment =
+                childFragmentManager.findFragmentById(R.id.nav_host_fragment_home) as
+                        NavHostFragment
+        val navController = navHostFragment.navController
+
+        binding.bottomNavigation.setupWithNavController(navController)
+
+        Log.d("HomePageFragment", "Bottom navigation setup complete")
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        // Prevent memory leaks
         _binding = null
     }
 }

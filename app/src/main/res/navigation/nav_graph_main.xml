@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph_main"
+    app:startDestination="@id/loginWith3PartyFragment">
+
+    <!-- Auth Flow -->
+    <fragment
+        android:id="@+id/loginWith3PartyFragment"
+        android:name="com.example.mobileapp.feature.auth.ui.fragment.LoginWith3PartyFragment"
+        android:label="Login">
+        <action
+            android:id="@+id/action_loginWith3Party_to_loginCommon"
+            app:destination="@id/loginCommonFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_loginWith3Party_to_signUp"
+            app:destination="@id/signUpFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/loginCommonFragment"
+        android:name="com.example.mobileapp.feature.auth.ui.fragment.LoginCommonFragment"
+        android:label="Sign In">
+        <action
+            android:id="@+id/action_loginCommon_to_homePage"
+            app:destination="@id/homePageFragment"
+            app:popUpTo="@id/nav_graph_main"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_loginCommon_to_signUp"
+            app:destination="@id/signUpFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.example.mobileapp.feature.auth.ui.fragment.SignUpFragment"
+        android:label="Sign Up">
+        <action
+            android:id="@+id/action_signUp_to_completeProfile"
+            app:destination="@id/completeProfileFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/completeProfileFragment"
+        android:name="com.example.mobileapp.feature.auth.ui.fragment.CompleteProfileFragment"
+        android:label="Complete Profile">
+        <action
+            android:id="@+id/action_completeProfile_to_homePage"
+            app:destination="@id/homePageFragment"
+            app:popUpTo="@id/nav_graph_main"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <!-- Home Flow with Bottom Navigation -->
+    <fragment
+        android:id="@+id/homePageFragment"
+        android:name="com.example.mobileapp.feature.homepage.ui.fragment.HomePageFragment"
+        android:label="Home" />
+
+</navigation>

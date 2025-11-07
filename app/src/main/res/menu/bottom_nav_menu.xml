@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/homeFragment"
+        android:icon="@drawable/ic_cgv"
+        android:title="Home" />
+    
+    <item
+        android:id="@+id/ticketFragment"
+        android:icon="@drawable/movie_ticket32"
+        android:title="Tickets" />
+    
+    <item
+        android:id="@+id/profileFragment"
+        android:icon="@drawable/ic_default_avatar"
+        android:title="Profile" />
+</menu>

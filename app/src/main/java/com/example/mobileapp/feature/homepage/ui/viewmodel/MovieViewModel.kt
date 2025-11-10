@@ -24,10 +24,10 @@ class MovieViewModel @Inject constructor(private val movieUseCase: MovieUseCase)
     val isError : StateFlow<String? > = _isError.asStateFlow()
 
     init {
-
+        fetchMovieList()
     }
 
-    private fun fetchMovieList() {
+    fun fetchMovieList() {
         viewModelScope.launch {
             _isLoading.value = true
             _isError.value = null
@@ -37,11 +37,13 @@ class MovieViewModel @Inject constructor(private val movieUseCase: MovieUseCase)
                     items ->
                     Log.d("Movie View Model","Fetching ${items.size} Movie")
                     _movieItem.value = items
+                    _isLoading.value = false
                 }
                 .onFailure {
                     exception ->
                     Log.e("Movie View Model","Fetching error",exception)
                     _isError.value = exception.message?: "Unknown Error"
+                    _isLoading.value = false
                 }
         }
     }

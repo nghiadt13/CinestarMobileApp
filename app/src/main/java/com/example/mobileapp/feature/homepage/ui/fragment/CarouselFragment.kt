@@ -24,7 +24,6 @@ class CarouselFragment : Fragment() {
 
     private var _binding: FragmentHomeCarouselBinding? = null
     private val binding get() = _binding!!
-
     private val carouselViewModel: CarouselViewModel by viewModels()
     private lateinit var carouselAdapter: CarouselAdapter
 
@@ -80,12 +79,22 @@ class CarouselFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             carouselViewModel.carouselItem.collect { carouselItems ->
                 Log.d("CarouselFragment", "Received ${carouselItems.size} carousel items")
-                
+
                 if (carouselItems.isNotEmpty()) {
                     carouselAdapter.submitList(carouselItems)
+
+                    // Set initial position to middle for infinite scrolling
+                    // This allows scrolling both left and right
+                    val middlePosition = carouselAdapter.itemCount / 2
+                    val startPosition = middlePosition - (middlePosition % carouselAdapter.getRealItemCount())
+
+                    binding.viewPagerBanner.post {
+                        binding.viewPagerBanner.setCurrentItem(startPosition, false)
+                    }
+
                     binding.viewPagerBanner.visibility = View.VISIBLE
                     binding.emptyView.visibility = View.GONE
-                    Log.d("CarouselFragment", "Carousel items displayed")
+                    Log.d("CarouselFragment", "Carousel items displayed with infinite scroll at position $startPosition")
                 } else {
                     binding.viewPagerBanner.visibility = View.GONE
                     binding.emptyView.visibility = View.VISIBLE
@@ -99,6 +108,7 @@ class CarouselFragment : Fragment() {
             carouselViewModel.isLoading.collect { isLoading ->
                 binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
                 Log.d("CarouselFragment", "Loading state: $isLoading")
+
             }
         }
 

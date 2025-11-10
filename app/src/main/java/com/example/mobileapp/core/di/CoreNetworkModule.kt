@@ -17,7 +17,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 @InstallIn(SingletonComponent::class)
 object CoreNetworkModule {
 
-    private const val BASE_URL = "http://10.85.17.113:8080/"
+    private const val BASE_URL = " https://straitly-nonparliamentary-micaela.ngrok-free.dev"
 
     @Provides
     @Singleton

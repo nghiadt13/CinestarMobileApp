@@ -1,5 +1,6 @@
-package com.example.mobileapp.feature.homepage.data.remote.dto
+package com.example.mobileapp.feature.homepage.data.remote.dto.response
 
+import com.example.mobileapp.feature.homepage.data.remote.dto.MovieItemDto
 import com.google.gson.annotations.SerializedName
 
 data class MovieResponse (

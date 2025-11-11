@@ -38,7 +38,6 @@ class CarouselFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        
         Log.d("CarouselFragment", "onViewCreated called")
         
         setupViewPager()

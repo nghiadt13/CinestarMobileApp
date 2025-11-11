@@ -39,11 +39,13 @@ class CarouselViewModel @Inject constructor(private val carouselUseCase: Carouse
                         items ->
                         Log.d("Carousel View Model","Received ${items.size} items")
                         _carouselItem.value = items
+                        _isLoading.value = false
                     }
                     .onFailure {
                         exception ->
                         Log.e("Carousel View Model", "Error while fetching ", exception)
                         _error.value = exception.message?: "Unknown Error"
+                        _isLoading.value = false
                     }
             }
     }

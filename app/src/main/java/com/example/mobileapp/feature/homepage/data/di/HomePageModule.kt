@@ -1,12 +1,15 @@
 package com.example.mobileapp.feature.homepage.data.di
 
 import com.example.mobileapp.feature.homepage.data.remote.api.CarouselApi
+import com.example.mobileapp.feature.homepage.data.remote.api.MembershipTierApi
 import com.example.mobileapp.feature.homepage.data.remote.api.MovieApi
 import com.example.mobileapp.feature.homepage.data.remote.api.NewsApi
 import com.example.mobileapp.feature.homepage.data.repository.CarouselRepositoryImpl
+import com.example.mobileapp.feature.homepage.data.repository.MembershipTierRepositoryImpl
 import com.example.mobileapp.feature.homepage.data.repository.MovieRepositoryImpl
 import com.example.mobileapp.feature.homepage.data.repository.NewsRepositoryImpl
 import com.example.mobileapp.feature.homepage.domain.repository.CarouselRepository
+import com.example.mobileapp.feature.homepage.domain.repository.MembershipTierRepository
 import com.example.mobileapp.feature.homepage.domain.repository.MovieRepository
 import com.example.mobileapp.feature.homepage.domain.repository.NewsRepository
 import dagger.Module
@@ -55,6 +58,18 @@ object HomePageModule {
     @Singleton
     fun provideNewsRepository(newsApi: NewsApi): NewsRepository {
         return NewsRepositoryImpl(newsApi)
+    }
+
+    @Provides
+    @Singleton
+    fun provideMembershipTierApi(retrofit: Retrofit): MembershipTierApi {
+        return retrofit.create(MembershipTierApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideMembershipTierRepository(membershipTierApi: MembershipTierApi): MembershipTierRepository {
+        return MembershipTierRepositoryImpl(membershipTierApi)
     }
 }
 

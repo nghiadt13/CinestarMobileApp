@@ -35,6 +35,14 @@
             android:layout_marginTop="24dp"
             android:name="com.example.mobileapp.feature.homepage.ui.fragment.NewsFragment" />
 
+        <!-- Membership Tier Section Container -->
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/membership_tier_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:name="com.example.mobileapp.feature.homepage.ui.fragment.MembershipTierFragment" />
+
         <!-- Có thể thêm sections khác vào đây -->
         <!--
         <androidx.fragment.app.FragmentContainerView

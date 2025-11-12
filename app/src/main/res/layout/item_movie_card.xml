@@ -3,11 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="140dp"
+    android:layout_width="220dp"
     android:layout_height="wrap_content"
-    android:layout_marginEnd="12dp"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="4dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="0dp"
     android:clickable="true"
     android:focusable="true"
     android:foreground="?attr/selectableItemBackground">
@@ -20,7 +21,7 @@
         <ImageView
             android:id="@+id/imageView_moviePoster"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="250dp"
             android:scaleType="centerCrop"
             android:contentDescription="Movie Poster"
             app:layout_constraintTop_toTopOf="parent"
@@ -87,6 +88,7 @@
                 android:textColor="@android:color/white"
                 android:textSize="14sp"
                 android:textStyle="bold"
+                android:minLines="2"
                 android:maxLines="2"
                 android:ellipsize="end"
                 tools:text="Spider-Man: No Way Home" />

@@ -7,8 +7,10 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobileapp.databinding.FragmentHomeCarouselBinding
 import com.example.mobileapp.databinding.FragmentHomeMovieBinding
+import com.example.mobileapp.databinding.FragmentHomeNewsBinding
 import com.example.mobileapp.feature.homepage.domain.model.CarouselItem
 import com.example.mobileapp.feature.homepage.domain.model.MovieItem
+import com.example.mobileapp.feature.homepage.domain.model.NewsItem
 
 class HomePageAdapter(private val onCarouselItemClick: (CarouselItem) -> Unit) :
         ListAdapter<HomeItem, RecyclerView.ViewHolder>(HomeItemDiffCallBack()) {
@@ -16,12 +18,14 @@ class HomePageAdapter(private val onCarouselItemClick: (CarouselItem) -> Unit) :
     companion object {
         private const val VIEW_TYPE_CAROUSEL = 1
         private const val VIEW_TYPE_MOVIE = 2
+        private const val VIEW_TYPE_NEWS = 3
     }
 
     override fun getItemViewType(position: Int): Int {
         return when (getItem(position)) {
             is HomeItem.CarouselSection -> VIEW_TYPE_CAROUSEL
             is HomeItem.MovieListSection -> VIEW_TYPE_MOVIE
+            is HomeItem.NewsListSection -> VIEW_TYPE_NEWS
 
             else -> throw IllegalArgumentException("Unknown item")
         }
@@ -40,6 +44,11 @@ class HomePageAdapter(private val onCarouselItemClick: (CarouselItem) -> Unit) :
                 MovieSectionViewHolder(binding)
             }
 
+            VIEW_TYPE_NEWS -> {
+                val binding = FragmentHomeNewsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+                NewsSectionViewHolder(binding)
+            }
+
             else -> throw IllegalArgumentException("Unknown view type: $viewType")
         }
     }
@@ -54,6 +63,11 @@ class HomePageAdapter(private val onCarouselItemClick: (CarouselItem) -> Unit) :
             is MovieSectionViewHolder -> {
                 val movieItem = getItem(position) as HomeItem.MovieListSection
                 holder.bind(movieItem.items)
+            }
+
+            is NewsSectionViewHolder -> {
+                val newsItem = getItem(position) as HomeItem.NewsListSection
+                holder.bind(newsItem.items)
             }
         }
     }
@@ -117,6 +131,38 @@ class HomePageAdapter(private val onCarouselItemClick: (CarouselItem) -> Unit) :
         }
     }
 
+    inner class NewsSectionViewHolder(private val binding: FragmentHomeNewsBinding) : RecyclerView.ViewHolder(binding.root) {
+        private val newsAdapter = NewsAdapter { newsItem ->
+            // TODO: Handle news item click
+        }
+
+        init {
+            binding.viewPagerNews.apply {
+                adapter = newsAdapter
+                clipToPadding = false
+                clipChildren = false
+                offscreenPageLimit = 3
+
+                // Get the RecyclerView inside ViewPager2
+                getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
+
+                // Add page transformer for carousel effect
+                val compositePageTransformer = androidx.viewpager2.widget.CompositePageTransformer()
+                compositePageTransformer.addTransformer(androidx.viewpager2.widget.MarginPageTransformer(16))
+                compositePageTransformer.addTransformer { page, position ->
+                    val r = 1 - kotlin.math.abs(position)
+                    page.scaleY = 0.85f + r * 0.15f
+                }
+
+                setPageTransformer(compositePageTransformer)
+            }
+        }
+
+        fun bind(newsItems: List<NewsItem>) {
+            newsAdapter.submitList(newsItems)
+        }
+    }
+
     private class HomeItemDiffCallBack : DiffUtil.ItemCallback<HomeItem>() {
         override fun areItemsTheSame(oldItem: HomeItem, newItem: HomeItem): Boolean {
             return when {
@@ -124,6 +170,9 @@ class HomePageAdapter(private val onCarouselItemClick: (CarouselItem) -> Unit) :
                         oldItem.items.firstOrNull()?.id == newItem.items.firstOrNull()?.id
 
                 oldItem is HomeItem.MovieListSection && newItem is HomeItem.MovieListSection ->
+                    oldItem.items.firstOrNull()?.id == newItem.items.firstOrNull()?.id
+
+                oldItem is HomeItem.NewsListSection && newItem is HomeItem.NewsListSection ->
                     oldItem.items.firstOrNull()?.id == newItem.items.firstOrNull()?.id
 
                 else -> false

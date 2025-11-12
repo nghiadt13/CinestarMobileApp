@@ -4,20 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="16dp">
+    android:paddingTop="6dp">
 
     <!-- ViewPager2 for Carousel -->
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager_banner"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="140dp"
         android:clipToPadding="false"
         android:clipChildren="false"
         android:paddingStart="40dp"
         android:paddingEnd="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
     <!-- Loading Indicator -->
     <ProgressBar

@@ -27,6 +27,14 @@
             android:layout_marginTop="24dp"
             android:name="com.example.mobileapp.feature.homepage.ui.fragment.MovieFragment" />
 
+        <!-- News Section Container -->
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/news_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:name="com.example.mobileapp.feature.homepage.ui.fragment.NewsFragment" />
+
         <!-- Có thể thêm sections khác vào đây -->
         <!--
         <androidx.fragment.app.FragmentContainerView

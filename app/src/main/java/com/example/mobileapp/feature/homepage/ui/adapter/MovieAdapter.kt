@@ -41,7 +41,7 @@ class MovieAdapter(private val onMovieClick : (MovieItem) -> (Unit)) :
             binding.textViewMovieTitle.text = item.title
             binding.textViewRating.text = item.ratingAvg.toString()
             binding.textViewDuration.text = item.durationMin.toString()
-            binding.textViewGenre.text = item.genres.toString()
+            binding.textViewGenre.text = item.genreNames
         }
     }
     class MovieDiffCallBack : DiffUtil.ItemCallback<MovieItem>() {

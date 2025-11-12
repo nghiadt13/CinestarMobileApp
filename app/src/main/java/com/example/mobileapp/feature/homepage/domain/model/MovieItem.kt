@@ -9,4 +9,7 @@ data class MovieItem (
     val genres : List<GenreDto>?,
     val durationMin :  Int,
     val ratingAvg : Double
-)
+) {
+    val genreNames: String
+        get() = genres?.joinToString(", ") { it.name } ?: "Không rõ"
+}

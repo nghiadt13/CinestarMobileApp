@@ -14,7 +14,6 @@ object MovieMapper {
             durationMin = dto.durationMin
         )
     }
-
     fun toDomainList(dtoList : List<MovieItemDto>) : List<MovieItem> {
         return dtoList.map {
             toDomainMapper(it)

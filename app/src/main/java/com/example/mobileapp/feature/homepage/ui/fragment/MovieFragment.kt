@@ -10,9 +10,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.PagerSnapHelper
 import com.example.mobileapp.databinding.FragmentHomeMovieBinding
 import com.example.mobileapp.feature.homepage.domain.model.MovieItem
 import com.example.mobileapp.feature.homepage.ui.adapter.MovieAdapter
+import com.example.mobileapp.feature.homepage.ui.helper.CarouselEffectHelper
 import com.example.mobileapp.feature.homepage.ui.viewmodel.MovieViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -72,8 +74,24 @@ class MovieFragment : Fragment() {
             setHasFixedSize(true)
             clipToPadding = false
             clipChildren = false
+
+            // Add snap helper to snap items to center
+            val snapHelper = PagerSnapHelper()
+            snapHelper.attachToRecyclerView(this)
+
+            // Add carousel effect
+            val carouselEffect = CarouselEffectHelper(
+                scaleDownBy = 0.15f,  // Scale down by 15%
+                translationYBy = 80f  // Move down by 60dp
+            )
+            addOnScrollListener(carouselEffect)
+
+            // Trigger initial effect
+            post {
+                carouselEffect.onScrolled(this, 0, 0)
+            }
         }
-        
+
         Log.d("MovieFragment", "RecyclerView setup complete")
     }
 

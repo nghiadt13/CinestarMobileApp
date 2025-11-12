@@ -2,7 +2,7 @@
 <resources>
     <style name="ShapeAppearanceOverlay.MobileApp.RoundedButton" parent="">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">@dimen/social_button_corner_radius</item>
+        <item name="cornerSize">@dimen/social_button_corner_radius_10</item>
     </style>
 
     <style name="Widget.MobileApp.SocialButton" parent="Widget.Material3.Button">
@@ -11,7 +11,6 @@
         <item name="iconTint">@null</item>
         <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.MobileApp.RoundedButton</item>
     </style>
-
 
         <style name="CircleImageView" parent="">
             <item name="cornerFamily">rounded</item>

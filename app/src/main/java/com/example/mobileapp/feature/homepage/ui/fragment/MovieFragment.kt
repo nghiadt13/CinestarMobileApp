@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import com.example.mobileapp.databinding.FragmentHomeMovieBinding
@@ -165,9 +166,14 @@ class MovieFragment : Fragment() {
     }
 
     private fun onMovieItemClick(item: MovieItem) {
-        Toast.makeText(requireContext(), "Clicked: ${item.title}", Toast.LENGTH_SHORT).show()
-        Log.d("MovieFragment", "Movie item clicked: ${item.title}")
-        // TODO: Navigate to movie detail screen
+        Log.d("MovieFragment", "Movie item clicked: ${item.title}, ID: ${item.id}")
+        try {
+            val action = HomePageFragmentDirections.actionHomePageToMovieDetail(item.id)
+            findNavController().navigate(action)
+        } catch (e: Exception) {
+            Log.e("MovieFragment", "Navigation error: ${e.message}")
+            Toast.makeText(requireContext(), "Không thể mở chi tiết phim", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun showError(error: String) {

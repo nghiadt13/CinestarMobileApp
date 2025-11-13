@@ -65,6 +65,24 @@
     <fragment
         android:id="@+id/homePageFragment"
         android:name="com.example.mobileapp.feature.homepage.ui.fragment.HomePageFragment"
-        android:label="Home" />
+        android:label="Home">
+        <action
+            android:id="@+id/action_homePage_to_movieDetail"
+            app:destination="@id/movieDetailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <!-- Movie Detail -->
+    <fragment
+        android:id="@+id/movieDetailFragment"
+        android:name="com.example.mobileapp.feature.moviedetail.ui.fragment.MovieDetailFragment"
+        android:label="Movie Detail">
+        <argument
+            android:name="movieId"
+            app:argType="integer" />
+    </fragment>
 
 </navigation>

@@ -7,5 +7,6 @@
     <color name="black">#000000</color>
     <color name="extra_light_gray">#FAFAFA</color>
     <color name="soft_gray">#EEEEEE</color>
+    <color name="red">#FF0000</color>
 
 </resources>

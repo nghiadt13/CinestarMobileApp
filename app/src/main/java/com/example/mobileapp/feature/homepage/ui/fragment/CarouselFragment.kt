@@ -21,7 +21,6 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class CarouselFragment : Fragment() {
-
     private var _binding: FragmentHomeCarouselBinding? = null
     private val binding get() = _binding!!
     private val carouselViewModel: CarouselViewModel by viewModels()

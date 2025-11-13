@@ -33,4 +33,15 @@
     <string name="NewsDescription">LAY\'S CHÍNH THỨC "ĐỔ BỘ" CGV - CHILL PHIM GIÒN TAN HẾT CỠ </string>
     <string name="News">Tin mới</string>
     <string name="MembershipTier">Hạng thành viên</string>
+    <string name="Booking">Đặt vé</string>
+    <string name="duration">Thời lượng:</string>
+    <string name="release_date">Ngày phát hành:</string>
+    <string name="genres">Thể loại:</string>
+    <string name="formats">Định dạng:</string>
+    <string name="synopsis">Tóm tắt</string>
+    <string name="watch_trailer">Xem Trailer</string>
+    <string name="retry">Thử lại</string>
+    <string name="trailer">Trailer</string>
+    <string name="no_trailer_available">Không có trailer</string>
+
 </resources>

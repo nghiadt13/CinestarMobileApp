@@ -126,6 +126,9 @@ dependencies {
     ksp("com.github.bumptech.glide:ksp:4.16.0")
     implementation("com.github.bumptech.glide:okhttp3-integration:4.16.0")
 
+    // YouTube Player
+    implementation("com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0")
+
     // DI Hilt
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)

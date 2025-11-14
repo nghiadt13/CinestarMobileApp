@@ -116,6 +116,7 @@
                 tools:text="148 phút" />
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_booking"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:text="@string/Booking"

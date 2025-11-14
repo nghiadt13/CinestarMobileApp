@@ -37,6 +37,7 @@ class MovieAdapter(private val onMovieClick : (MovieItem) -> (Unit)) :
                 .into(binding.imageViewMoviePoster)
 
             binding.root.setOnClickListener { onMovieClick(item) }
+            binding.buttonBooking.setOnClickListener { onMovieClick(item) }
 
             binding.textViewMovieTitle.text = item.title
             binding.textViewRating.text = item.ratingAvg.toString()

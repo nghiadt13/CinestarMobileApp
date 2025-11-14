@@ -51,6 +51,20 @@ android {
         compose = true
         android.buildFeatures.buildConfig = true
     }
+
+    packaging {
+        resources {
+            excludes += "/META-INF/DEPENDENCIES"
+            excludes += "/META-INF/LICENSE"
+            excludes += "/META-INF/LICENSE.txt"
+            excludes += "/META-INF/license.txt"
+            excludes += "/META-INF/NOTICE"
+            excludes += "/META-INF/NOTICE.txt"
+            excludes += "/META-INF/notice.txt"
+            excludes += "/META-INF/ASL2.0"
+            excludes += "/META-INF/*.kotlin_module"
+        }
+    }
 }
 
 // Configure KSP to avoid cross-drive path issues
@@ -153,4 +167,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.10.2")
     implementation("androidx.security:security-crypto:1.1.0-alpha06")
     implementation("me.relex:circleindicator:2.1.6")
+
+    implementation("com.google.api-client:google-api-client-android:1.35.2")
+    implementation("com.google.apis:google-api-services-youtube:v3-rev222-1.25.0")
 }

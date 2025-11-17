@@ -12,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.example.mobileapp.databinding.FragmentHomeMovieBinding
 import com.example.mobileapp.feature.homepage.domain.model.MovieItem
 import com.example.mobileapp.feature.homepage.ui.adapter.MovieAdapter
@@ -83,14 +84,47 @@ class MovieFragment : Fragment() {
             // Add carousel effect
             val carouselEffect = CarouselEffectHelper(
                 scaleDownBy = 0.15f,  // Scale down by 15%
-                translationYBy = 80f  // Move down by 60dp
+                translationYBy = 80f  // Move down by 80dp
             )
             addOnScrollListener(carouselEffect)
 
-            // Trigger initial effect
-            post {
-                carouselEffect.onScrolled(this, 0, 0)
-            }
+            // Add infinite scroll repositioning listener
+            addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                    super.onScrollStateChanged(recyclerView, newState)
+
+                    // Only reposition when scroll has stopped
+                    if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                        val layoutMgr = recyclerView.layoutManager as? LinearLayoutManager
+                        layoutMgr?.let { lm ->
+                            val firstVisiblePosition = lm.findFirstVisibleItemPosition()
+                            val realItemCount = movieAdapter.getRealItemCount()
+
+                            if (realItemCount == 0) return
+
+                            val totalItemCount = movieAdapter.itemCount
+                            val threshold = realItemCount * 10
+
+                            when {
+                                firstVisiblePosition < threshold -> {
+                                    // Too close to the start, jump to equivalent position further right
+                                    val currentRealPosition = firstVisiblePosition % realItemCount
+                                    val newPosition = (totalItemCount / 2) + currentRealPosition
+                                    recyclerView.scrollToPosition(newPosition)
+                                    Log.d("MovieFragment", "Repositioned from $firstVisiblePosition to $newPosition (near start)")
+                                }
+                                firstVisiblePosition > totalItemCount - threshold -> {
+                                    // Too close to the end, jump to equivalent position further left
+                                    val currentRealPosition = firstVisiblePosition % realItemCount
+                                    val newPosition = (totalItemCount / 2) + currentRealPosition
+                                    recyclerView.scrollToPosition(newPosition)
+                                    Log.d("MovieFragment", "Repositioned from $firstVisiblePosition to $newPosition (near end)")
+                                }
+                            }
+                        }
+                    }
+                }
+            })
         }
 
         Log.d("MovieFragment", "RecyclerView setup complete")
@@ -101,11 +135,55 @@ class MovieFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             movieViewModel.movieItem.collect { movieItems ->
                 Log.d("MovieFragment", "Received ${movieItems.size} movie items")
-                
+
                 if (movieItems.isNotEmpty()) {
                     movieAdapter.submitList(movieItems)
+
+                    // Calculate middle position for infinite scrolling
+                    val realItemCount = movieAdapter.getRealItemCount()
+                    val totalItemCount = movieAdapter.itemCount
+
+                    // Start at a position in the middle of our virtual list
+                    val middlePosition = totalItemCount / 2
+                    val startPosition = middlePosition - (middlePosition % realItemCount)
+
+                    binding.recyclerViewMovies.post {
+                        binding.recyclerViewMovies.scrollToPosition(startPosition)
+                        Log.d("MovieFragment", "Set initial position to $startPosition (real item: ${startPosition % realItemCount}) out of $totalItemCount total items")
+
+                        // Trigger carousel effect after layout is complete
+                        binding.recyclerViewMovies.viewTreeObserver.addOnGlobalLayoutListener(
+                            object : android.view.ViewTreeObserver.OnGlobalLayoutListener {
+                                override fun onGlobalLayout() {
+                                    // Remove listener to avoid multiple calls
+                                    binding.recyclerViewMovies.viewTreeObserver.removeOnGlobalLayoutListener(this)
+
+                                    // Manually trigger carousel effect for initial state
+                                    val layoutManager = binding.recyclerViewMovies.layoutManager as? LinearLayoutManager
+                                    layoutManager?.let {
+                                        for (i in 0 until binding.recyclerViewMovies.childCount) {
+                                            val child = binding.recyclerViewMovies.getChildAt(i)
+                                            val position = it.getPosition(child)
+                                            val centerX = binding.recyclerViewMovies.width / 2f
+                                            val childCenterX = (child.left + child.right) / 2f
+                                            val distance = Math.abs(centerX - childCenterX)
+                                            val maxDistance = binding.recyclerViewMovies.width / 2f
+                                            val scale = 1f - (distance / maxDistance) * 0.15f
+
+                                            child.scaleX = scale.coerceAtLeast(0.85f)
+                                            child.scaleY = scale.coerceAtLeast(0.85f)
+                                            child.translationY = if (scale < 1f) 80f else 0f
+                                        }
+                                    }
+
+                                    Log.d("MovieFragment", "Initial carousel effect applied")
+                                }
+                            }
+                        )
+                    }
+
                     binding.recyclerViewMovies.visibility = View.VISIBLE
-                    Log.d("MovieFragment", "Movie items displayed")
+                    Log.d("MovieFragment", "Movie items displayed with infinite scroll")
                 } else {
                     binding.recyclerViewMovies.visibility = View.GONE
                     Log.d("MovieFragment", "No movie items to display")

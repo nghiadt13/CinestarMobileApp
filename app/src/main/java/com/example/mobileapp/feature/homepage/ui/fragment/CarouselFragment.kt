@@ -53,7 +53,7 @@ class CarouselFragment : Fragment() {
             clipToPadding = false
             clipChildren = false
             offscreenPageLimit = 3
-            
+
             // Configure inner RecyclerView
             getChildAt(0)?.let { child ->
                 if (child is androidx.recyclerview.widget.RecyclerView) {
@@ -67,8 +67,39 @@ class CarouselFragment : Fragment() {
             val transformer = CompositePageTransformer()
             transformer.addTransformer(MarginPageTransformer(30))
             setPageTransformer(transformer)
+
+            // Add page change callback for infinite scrolling repositioning
+            registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) {
+                    super.onPageSelected(position)
+
+                    val realItemCount = carouselAdapter.getRealItemCount()
+                    if (realItemCount == 0) return
+
+                    val totalItemCount = carouselAdapter.itemCount
+
+                    // If we're getting close to the boundaries, reposition to equivalent position in the middle
+                    // This ensures we never run out of items to scroll
+                    val threshold = realItemCount * 10 // Keep at least 10 cycles of items on each side
+
+                    when {
+                        position < threshold -> {
+                            // Too close to the start, jump to equivalent position further right
+                            val newPosition = position + (realItemCount * 100)
+                            post { setCurrentItem(newPosition, false) }
+                            Log.d("CarouselFragment", "Repositioned from $position to $newPosition (near start)")
+                        }
+                        position > totalItemCount - threshold -> {
+                            // Too close to the end, jump to equivalent position further left
+                            val newPosition = position - (realItemCount * 100)
+                            post { setCurrentItem(newPosition, false) }
+                            Log.d("CarouselFragment", "Repositioned from $position to $newPosition (near end)")
+                        }
+                    }
+                }
+            })
         }
-        
+
         Log.d("CarouselFragment", "ViewPager2 setup complete")
     }
 
@@ -81,18 +112,24 @@ class CarouselFragment : Fragment() {
                 if (carouselItems.isNotEmpty()) {
                     carouselAdapter.submitList(carouselItems)
 
-                    // Set initial position to middle for infinite scrolling
-                    // This allows scrolling both left and right
-                    val middlePosition = carouselAdapter.itemCount / 2
-                    val startPosition = middlePosition - (middlePosition % carouselAdapter.getRealItemCount())
+                    // Calculate middle position for infinite scrolling
+                    // This ensures we can scroll both left and right from the start
+                    val realItemCount = carouselAdapter.getRealItemCount()
+                    val totalItemCount = carouselAdapter.itemCount
+
+                    // Start at a position in the middle of our virtual list
+                    // that corresponds to the first item (index 0)
+                    val middlePosition = totalItemCount / 2
+                    val startPosition = middlePosition - (middlePosition % realItemCount)
 
                     binding.viewPagerBanner.post {
                         binding.viewPagerBanner.setCurrentItem(startPosition, false)
+                        Log.d("CarouselFragment", "Set initial position to $startPosition (real item: ${startPosition % realItemCount}) out of $totalItemCount total items")
                     }
 
                     binding.viewPagerBanner.visibility = View.VISIBLE
                     binding.emptyView.visibility = View.GONE
-                    Log.d("CarouselFragment", "Carousel items displayed with infinite scroll at position $startPosition")
+                    Log.d("CarouselFragment", "Carousel items displayed with infinite scroll")
                 } else {
                     binding.viewPagerBanner.visibility = View.GONE
                     binding.emptyView.visibility = View.VISIBLE

@@ -14,6 +14,17 @@ import com.example.mobileapp.feature.homepage.domain.model.MovieItem
 class MovieAdapter(private val onMovieClick : (MovieItem) -> (Unit)) :
     ListAdapter<MovieItem, MovieAdapter.MovieViewHolder>(MovieDiffCallBack()) {
 
+    companion object {
+        // Large number for infinite scrolling effect
+        private const val INFINITE_SCROLL_MULTIPLIER = 1000
+    }
+
+    override fun getItemCount(): Int {
+        // Return a very large number for infinite scrolling
+        val realCount = super.getItemCount()
+        return if (realCount == 0) 0 else realCount * INFINITE_SCROLL_MULTIPLIER
+    }
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -23,8 +34,15 @@ class MovieAdapter(private val onMovieClick : (MovieItem) -> (Unit)) :
     }
 
     override fun onBindViewHolder(holder: MovieAdapter.MovieViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        val realItemCount = super.getItemCount()
+        if (realItemCount > 0) {
+            // Use modulo to get the actual item position
+            val actualPosition = position % realItemCount
+            holder.bind(getItem(actualPosition))
+        }
     }
+
+    fun getRealItemCount(): Int = super.getItemCount()
 
     inner class MovieViewHolder(private  val binding: ItemMovieCardBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: MovieItem) {

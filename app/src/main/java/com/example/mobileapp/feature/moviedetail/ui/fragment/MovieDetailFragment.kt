@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.mobileapp.R
 import com.example.mobileapp.databinding.FragmentMovieDetailBinding
 import com.example.mobileapp.feature.moviedetail.ui.adapter.MovieDetailAdapter
 import com.example.mobileapp.feature.moviedetail.ui.viewmodel.MovieDetailViewModel
@@ -19,7 +20,8 @@ import kotlinx.coroutines.launch
 class MovieDetailFragment : Fragment() {
 
     private var _binding: FragmentMovieDetailBinding? = null
-    private val binding get() = _binding!!
+    private val binding
+        get() = _binding!!
 
     private val viewModel: MovieDetailViewModel by viewModels()
     private val args: MovieDetailFragmentArgs by navArgs()
@@ -27,9 +29,9 @@ class MovieDetailFragment : Fragment() {
     private var adapter: MovieDetailAdapter? = null
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View {
         _binding = FragmentMovieDetailBinding.inflate(inflater, container, false)
         adapter = MovieDetailAdapter(requireContext(), binding)
@@ -49,12 +51,12 @@ class MovieDetailFragment : Fragment() {
     }
 
     private fun setupUI() {
-        binding.btnBack.setOnClickListener {
-            findNavController().navigateUp()
-        }
+        binding.btnBack.setOnClickListener { findNavController().navigateUp() }
 
-        binding.btnRetry.setOnClickListener {
-            viewModel.fetchMovieDetail(args.movieId.toLong())
+        binding.btnRetry.setOnClickListener { viewModel.fetchMovieDetail(args.movieId.toLong()) }
+
+        binding.buttonBooking.setOnClickListener {
+            findNavController().navigate(R.id.action_movieDetail_to_bookingTicket)
         }
     }
 
@@ -81,7 +83,6 @@ class MovieDetailFragment : Fragment() {
             }
         }
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()

@@ -18,4 +18,11 @@
     <color name="seat_selected">#FF6B35</color>
     <color name="seat_booked">#9E9E9E</color>
 
+    <!-- Brand Colors -->
+    <color name="brand_red_500">#EF4444</color>
+    <color name="brand_red_600">#DC2626</color>
+    <color name="brand_red_700">#B91C1C</color>
+    <color name="brand_dark">#111827</color>
+    <color name="brand_surface">#1F2937</color>
+    <color name="seat_vip_border">#F59E0B</color>
 </resources>

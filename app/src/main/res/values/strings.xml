@@ -43,5 +43,6 @@
     <string name="retry">Thử lại</string>
     <string name="trailer">Trailer</string>
     <string name="no_trailer_available">Không có trailer</string>
+    <string name="comment">Bình luận</string>
 
 </resources>

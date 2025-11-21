@@ -170,4 +170,5 @@ dependencies {
 
     implementation("com.google.api-client:google-api-client-android:1.35.2")
     implementation("com.google.apis:google-api-services-youtube:v3-rev222-1.25.0")
+    implementation("com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0")
 }

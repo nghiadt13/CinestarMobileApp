@@ -16,14 +16,14 @@ data class MovieDetail(
     val ratingAvg: Double,
     val ratingCount: Int,
     val genres: List<GenreDto>,
-    val formats: List<FormatDto>
+    val formats: List<FormatDto>,
+    val comments: List<Comment> = emptyList()
 ) {
     val genreNames: String
         get() = genres.joinToString(", ") { it.name }
 
     val formatCodes: String
         get() = formats.joinToString(", ") { it.code }
-
     val durationText: String
         get() = durationMin?.let { "${it} phút" } ?: "Không rõ"
 

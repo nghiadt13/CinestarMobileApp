@@ -18,7 +18,7 @@ class ProfileFragment : Fragment() {
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
-    ): View {
+    ): View {  
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -38,7 +38,7 @@ class ProfileFragment : Fragment() {
             // Navigate back to login
             findNavController().navigate(R.id.loginWith3PartyFragment)
         }
-    }
+    }  
 
     override fun onDestroyView() {
         super.onDestroyView()

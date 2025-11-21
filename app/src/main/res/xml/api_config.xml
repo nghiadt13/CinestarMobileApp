@@ -2,4 +2,5 @@
 <resources>
     <!-- Thay URL này mỗi lần chạy Ngrok -->
     <string name="base_url"> https://straitly-nonparliamentary-micaela.ngrok-free.dev </string>
+    <string name="youtube_data_api_v3">AIzaSyAMvcpuCB59TW1VRSeun8R55h6QnFm7XCU</string>
 </resources>

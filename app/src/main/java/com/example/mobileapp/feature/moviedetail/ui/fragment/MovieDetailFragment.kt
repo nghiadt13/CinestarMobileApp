@@ -41,6 +41,7 @@ class MovieDetailFragment : Fragment() {
 
         setupUI()
         adapter?.setupWebView()
+        adapter?.setupCommentsRecyclerView()
         observeViewModel()
 
         // Fetch movie detail with ID from navigation args

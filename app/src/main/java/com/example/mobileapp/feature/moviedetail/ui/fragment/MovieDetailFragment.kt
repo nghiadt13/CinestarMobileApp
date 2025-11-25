@@ -56,10 +56,10 @@ class MovieDetailFragment : Fragment() {
         binding.btnRetry.setOnClickListener { viewModel.fetchMovieDetail(args.movieId.toLong()) }
 
         binding.buttonBooking.setOnClickListener {
-            findNavController().navigate(R.id.action_movieDetail_to_bookingTicket)
+            val action = MovieDetailFragmentDirections.actionMovieDetailToBookingCinema(args.movieId.toLong())
+            findNavController().navigate(action)
         }
     }
-
     private fun observeViewModel() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.movieDetail.collect { movieDetail ->

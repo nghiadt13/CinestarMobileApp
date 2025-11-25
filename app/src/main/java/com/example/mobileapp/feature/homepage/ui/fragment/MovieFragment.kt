@@ -246,7 +246,7 @@ class MovieFragment : Fragment() {
     private fun onMovieItemClick(item: MovieItem) {
         Log.d("MovieFragment", "Movie item clicked: ${item.title}, ID: ${item.id}")
         try {
-            val action = HomePageFragmentDirections.actionHomePageToMovieDetail(item.id)
+            val action = HomePageFragmentDirections.actionHomePageToMovieDetail(item.id.toLong())
             findNavController().navigate(action)
         } catch (e: Exception) {
             Log.e("MovieFragment", "Navigation error: ${e.message}")

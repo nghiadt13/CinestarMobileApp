@@ -25,4 +25,6 @@
     <color name="brand_dark">#111827</color>
     <color name="brand_surface">#1F2937</color>
     <color name="seat_vip_border">#F59E0B</color>
+
+    <color name="yellow">#FFFF00 </color>
 </resources>

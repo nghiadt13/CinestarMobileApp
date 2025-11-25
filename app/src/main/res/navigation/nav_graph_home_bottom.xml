@@ -19,4 +19,34 @@
         android:name="com.example.mobileapp.feature.profile.ui.fragment.ProfileFragment"
         android:label="Profile" />
 
+    <fragment
+        android:id="@+id/movieDetailFragment"
+        android:name="com.example.mobileapp.feature.moviedetail.ui.fragment.MovieDetailFragment"
+        android:label="Movie Detail">
+        <argument
+            android:name="movieId"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_movieDetail_to_bookingCinema"
+            app:destination="@id/bookingCinemaFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/bookingCinemaFragment"
+        android:name="com.example.mobileapp.feature.booking.ui.fragment.BookingCinemaFragment"
+        android:label="Booking Cinema">
+        <action
+            android:id="@+id/action_bookingCinema_to_bookingTicket"
+            app:destination="@id/bookingTicketFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/bookingTicketFragment"
+        android:name="com.example.mobileapp.feature.ticket.ui.fragment.BookingTicketFragment"
+        android:label="Booking Ticket">
+        <argument
+            android:name="cinemaName"
+            app:argType="string" />
+    </fragment>
+
 </navigation>

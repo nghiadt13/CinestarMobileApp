@@ -82,9 +82,26 @@
         android:label="Movie Detail">
         <argument
             android:name="movieId"
-            app:argType="integer" />
+            app:argType="long" />
         <action
-            android:id="@+id/action_movieDetail_to_bookingTicket"
+            android:id="@+id/action_movieDetail_to_bookingCinema"
+            app:destination="@id/bookingCinemaFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <!-- Booking Cinema -->
+    <fragment
+        android:id="@+id/bookingCinemaFragment"
+        android:name="com.example.mobileapp.feature.booking.ui.fragment.BookingCinemaFragment"
+        android:label="Booking Cinema">
+        <argument
+            android:name="movieId"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_bookingCinema_to_bookingTicket"
             app:destination="@id/bookingTicketFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
@@ -96,6 +113,10 @@
     <fragment
         android:id="@+id/bookingTicketFragment"
         android:name="com.example.mobileapp.feature.ticket.ui.fragment.BookingTicketFragment"
-        android:label="Booking Ticket" />
+        android:label="Booking Ticket">
+        <argument
+            android:name="cinemaName"
+            app:argType="string" />
+    </fragment>
 
 </navigation>

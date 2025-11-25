@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.mobileapp.databinding.FragmentBookingTicketBinding
 import com.example.mobileapp.feature.ticket.ui.adapter.DateAdapter
 import com.example.mobileapp.feature.ticket.ui.adapter.SeatAdapter
@@ -23,6 +24,8 @@ class BookingTicketFragment : Fragment() {
     private var _binding: FragmentBookingTicketBinding? = null
     private val binding
         get() = _binding!!
+
+    private val args: BookingTicketFragmentArgs by navArgs()
 
     private lateinit var dateAdapter: DateAdapter
     private lateinit var timeAdapter: TimeAdapter
@@ -45,6 +48,8 @@ class BookingTicketFragment : Fragment() {
     private fun setupUI() {
         binding.btnBack.setOnClickListener { findNavController().navigateUp() }
 
+        args.cinemaName?.let { binding.tvCinemaName.text = it }
+
         setupDates()
         setupTimes()
         setupSeats()
@@ -54,14 +59,14 @@ class BookingTicketFragment : Fragment() {
 
     private fun setupDates() {
         dateAdapter = DateAdapter { date ->
-            val dateFormat = SimpleDateFormat("EEEE, dd/MM/yyyy", Locale("vi", "VN"))
+            val dateFormat = SimpleDateFormat("EEEE, dd/MM/yyyy", Locale.forLanguageTag("vi-VN"))
             binding.tvSelectedDate.text = dateFormat.format(date).uppercase()
         }
         binding.rvDates.adapter = dateAdapter
     }
 
     private fun setupTimes() {
-        timeAdapter = TimeAdapter { time ->
+        timeAdapter = TimeAdapter { _ ->
             // Handle time selection if needed
         }
         binding.rvTimeSlots.adapter = timeAdapter
@@ -76,7 +81,7 @@ class BookingTicketFragment : Fragment() {
             selectedSeats: List<com.example.mobileapp.feature.ticket.ui.adapter.Seat>
     ) {
         val total = selectedSeats.sumOf { it.price }
-        val formatter = NumberFormat.getInstance(Locale("vi", "VN"))
+        val formatter = NumberFormat.getInstance(Locale.forLanguageTag("vi-VN"))
         binding.tvTotalPrice.text = formatter.format(total)
 
         if (selectedSeats.isEmpty()) {

@@ -12,8 +12,10 @@ object CinemaMapper {
             city = dto.city,
             district = dto.district,
             phoneNumber = dto.phoneNumber,
+            email = dto.email,
             latitude = dto.latitude,
-            longitude = dto.longitude
+            longitude = dto.longitude,
+            logoUrl = dto.imageUrl ?: ""
         )
     }
 

@@ -29,5 +29,8 @@ data class CinemaDto(
     val latitude: BigDecimal? = null,
 
     @SerializedName("longitude")
-    val longitude: BigDecimal? = null
+    val longitude: BigDecimal? = null,
+
+    @SerializedName("imageUrl")
+    val imageUrl: String? = null
 )

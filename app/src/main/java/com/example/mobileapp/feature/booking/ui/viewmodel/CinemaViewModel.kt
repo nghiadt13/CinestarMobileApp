@@ -9,6 +9,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -17,8 +18,10 @@ class CinemaViewModel @Inject constructor(
     private val getCinemasUseCase: GetCinemasUseCase
 ) : ViewModel() {
 
-    private val _cinemas = MutableStateFlow<List<Cinema>>(emptyList())
-    val cinemas: StateFlow<List<Cinema>> = _cinemas.asStateFlow()
+    private val _allCinemas = MutableStateFlow<List<Cinema>>(emptyList())
+
+    private val _filteredCinemas = MutableStateFlow<List<Cinema>>(emptyList())
+    val filteredCinemas: StateFlow<List<Cinema>> = _filteredCinemas.asStateFlow()
 
     private val _isLoading = MutableStateFlow(false)
     val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
@@ -26,22 +29,71 @@ class CinemaViewModel @Inject constructor(
     private val _error = MutableStateFlow<String?>(null)
     val error: StateFlow<String?> = _error.asStateFlow()
 
-    fun fetchCinemasByMovieId(movieId: Long, city: String? = null) {
+    private val _currentCity = MutableStateFlow("Hà Nội")
+    val currentCity: StateFlow<String> = _currentCity.asStateFlow()
+
+    private val _searchQuery = MutableStateFlow("")
+
+    private val _availableCities = MutableStateFlow<List<String>>(emptyList())
+    val availableCities: StateFlow<List<String>> = _availableCities.asStateFlow()
+
+    init {
+        viewModelScope.launch {
+            combine(_allCinemas, _currentCity, _searchQuery) { cinemas, city, query ->
+                filterCinemas(cinemas, city, query)
+            }.collect { filtered ->
+                _filteredCinemas.value = filtered
+            }
+        }
+    }
+
+    fun fetchCinemasByMovieId(movieId: Long) {
         viewModelScope.launch {
             _isLoading.value = true
             _error.value = null
 
-            getCinemasUseCase(movieId, city)
+            getCinemasUseCase(movieId, null)
                 .onSuccess { cinemaList ->
                     Log.d("CinemaViewModel", "Fetched ${cinemaList.size} cinemas for movie $movieId")
-                    _cinemas.value = cinemaList
+                    _allCinemas.value = cinemaList
+
+                    // Extract available cities
+                    val cities = cinemaList.map { it.city }.distinct().sorted()
+                    _availableCities.value = cities
+
+                    // Set default city if current city is not available
+                    if (cities.isNotEmpty() && !cities.contains(_currentCity.value)) {
+                        _currentCity.value = cities.first()
+                    }
+
                     _isLoading.value = false
                 }
                 .onFailure { exception ->
                     Log.e("CinemaViewModel", "Error fetching cinemas", exception)
-                    _error.value = exception.message ?: "Unknown error"
+                    _error.value = exception.message ?: "Có lỗi xảy ra khi tải danh sách rạp"
                     _isLoading.value = false
                 }
+        }
+    }
+
+    fun setCity(city: String) {
+        _currentCity.value = city
+    }
+
+    fun setSearchQuery(query: String) {
+        _searchQuery.value = query
+    }
+
+    private fun filterCinemas(cinemas: List<Cinema>, city: String, query: String): List<Cinema> {
+        val filteredByCity = cinemas.filter { it.city == city }
+
+        return if (query.isBlank()) {
+            filteredByCity
+        } else {
+            filteredByCity.filter {
+                it.name.contains(query, ignoreCase = true) ||
+                    it.address.contains(query, ignoreCase = true)
+            }
         }
     }
 }

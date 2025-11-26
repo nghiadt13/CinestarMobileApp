@@ -35,6 +35,9 @@
         android:id="@+id/bookingCinemaFragment"
         android:name="com.example.mobileapp.feature.booking.ui.fragment.BookingCinemaFragment"
         android:label="Booking Cinema">
+        <argument
+            android:name="movieId"
+            app:argType="long" />
         <action
             android:id="@+id/action_bookingCinema_to_bookingTicket"
             app:destination="@id/bookingTicketFragment" />

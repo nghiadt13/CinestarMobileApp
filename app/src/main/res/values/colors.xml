@@ -33,6 +33,16 @@
     <color name="gray_700">#374151</color>
     <color name="gray_800">#1F2937</color>
     <color name="seat_vip_border">#F59E0B</color>
+    <color name="seat_couple_border">#EC4899</color>
+    <color name="seat_deluxe_border">#8B5CF6</color>
+    <color name="seat_locked_bg">#FEE2E2</color>
+    <color name="seat_blocked_bg">#D1D5DB</color>
+
+    <!-- Status Colors -->
+    <color name="success_green">#10B981</color>
+    <color name="warning_orange">#F59E0B</color>
+    <color name="gray">#6B7280</color>
+    <color name="brand_light">#FEF2F2</color>
 
     <color name="yellow">#FFFF00 </color>
 </resources>

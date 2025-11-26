@@ -3,16 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:padding="4dp">
+    android:padding="2dp">
 
     <TextView
         android:id="@+id/tv_seat"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:background="@drawable/bg_seat_available"
         android:gravity="center"
         android:textColor="@android:color/transparent"
-        android:textSize="10sp"
+        android:textSize="8sp"
         android:textStyle="bold"
         tools:text="A1"
         tools:textColor="@color/dark_gray" />

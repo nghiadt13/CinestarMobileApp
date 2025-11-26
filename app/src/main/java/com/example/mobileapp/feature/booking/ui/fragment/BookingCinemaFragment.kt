@@ -7,10 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.mobileapp.R
 import com.example.mobileapp.databinding.FragmentBookingCinemaBinding
@@ -89,9 +89,13 @@ class BookingCinemaFragment : Fragment() {
         // Continue button
         binding.btnContinue.setOnClickListener {
             selectedCinema?.let { cinema ->
-                // Navigate to showtime selection
-                // TODO: Implement navigation to showtime
-                Toast.makeText(requireContext(), "Đã chọn: ${cinema.name}", Toast.LENGTH_SHORT).show()
+                val action = BookingCinemaFragmentDirections
+                    .actionBookingCinemaToBookingTicket(
+                        movieId = args.movieId,
+                        cinemaId = cinema.id,
+                        cinemaName = cinema.name
+                    )
+                findNavController().navigate(action)
             }
         }
     }
@@ -111,12 +115,13 @@ class BookingCinemaFragment : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.isLoading.collect { isLoading ->
-                // Show/hide loading indicator if you have one
-                // For now, just control the visibility of the list
                 if (isLoading) {
                     binding.rvCinemas.visibility = View.GONE
                     binding.tvEmptyState.text = "Đang tải..."
                     binding.tvEmptyState.visibility = View.VISIBLE
+                } else {
+                    // When loading completes, update UI based on data
+                    updateEmptyState(viewModel.filteredCinemas.value.isEmpty())
                 }
             }
         }

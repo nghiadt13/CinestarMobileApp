@@ -115,6 +115,12 @@
         android:name="com.example.mobileapp.feature.ticket.ui.fragment.BookingTicketFragment"
         android:label="Booking Ticket">
         <argument
+            android:name="movieId"
+            app:argType="long" />
+        <argument
+            android:name="cinemaId"
+            app:argType="long" />
+        <argument
             android:name="cinemaName"
             app:argType="string" />
     </fragment>

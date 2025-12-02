@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
+    android:background="@drawable/bg_combo_item"
+    android:padding="12dp">
+
+    <!-- Combo Image -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_combo_image"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <ImageView
+            android:id="@+id/img_combo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:contentDescription="Combo Image"
+            tools:src="@drawable/placeholder" />
+
+    </androidx.cardview.widget.CardView>
+
+    <!-- Combo Info Container -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="16dp"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        app:layout_constraintStart_toEndOf="@id/card_combo_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <!-- Top: Title & Description -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_combo_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Combo Couple 2 Ngăn"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:maxLines="1"
+                android:ellipsize="end" />
+
+            <TextView
+                android:id="@+id/tv_combo_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="1 Bắp lớn 2 vị + 2 Coca lớn tươi mát lạnh."
+                android:textColor="@color/gray_400"
+                android:textSize="11sp"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:lineSpacingExtra="2dp" />
+
+        </LinearLayout>
+
+        <!-- Bottom: Price & Quantity Control -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <!-- Price -->
+            <TextView
+                android:id="@+id/tv_combo_price"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="109.000đ"
+                android:textColor="@color/brand_red_500"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <!-- Quantity Control -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="@drawable/bg_quantity_control"
+                android:padding="2dp">
+
+                <!-- Decrease Button -->
+                <ImageButton
+                    android:id="@+id/btn_decrease"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:background="@drawable/ripple_circle"
+                    android:src="@drawable/ic_expand_more"
+                    android:rotation="90"
+                    android:scaleX="0.6"
+                    android:scaleY="0.6"
+                    app:tint="@color/gray_400"
+                    android:contentDescription="Decrease" />
+
+                <!-- Quantity Display -->
+                <TextView
+                    android:id="@+id/tv_quantity"
+                    android:layout_width="24dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="0"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <!-- Increase Button -->
+                <ImageButton
+                    android:id="@+id/btn_increase"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:background="@drawable/ripple_circle"
+                    android:src="@drawable/ic_expand_more"
+                    android:rotation="-90"
+                    android:scaleX="0.6"
+                    android:scaleY="0.6"
+                    app:tint="@color/brand_red_500"
+                    android:contentDescription="Increase" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

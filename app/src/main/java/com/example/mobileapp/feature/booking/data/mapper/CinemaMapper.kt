@@ -6,16 +6,18 @@ import com.example.mobileapp.feature.booking.domain.model.Cinema
 object CinemaMapper {
     fun toDomain(dto: CinemaDto): Cinema {
         return Cinema(
-            id = dto.id,
-            name = dto.name,
-            address = dto.address,
-            city = dto.city,
-            district = dto.district,
-            phoneNumber = dto.phoneNumber,
-            email = dto.email,
-            latitude = dto.latitude,
-            longitude = dto.longitude,
-            logoUrl = dto.imageUrl ?: ""
+                id = dto.id,
+                name = dto.name,
+                address = dto.address,
+                city = dto.city,
+                district = dto.district,
+                phoneNumber = dto.phoneNumber,
+                email = dto.email,
+                latitude = dto.latitude,
+                longitude = dto.longitude,
+                logoUrl = dto.imageUrl ?: "",
+                hasShowtimes = dto.hasShowtimes,
+                message = dto.message
         )
     }
 

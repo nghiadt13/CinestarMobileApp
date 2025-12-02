@@ -45,4 +45,17 @@
     <color name="brand_light">#FEF2F2</color>
 
     <color name="yellow">#FFFF00 </color>
+
+    <!-- Payment Screen Colors -->
+    <color name="momo_pink">#A50064</color>
+    <color name="zalo_blue">#0068FF</color>
+    <color name="vietqr_blue">#1D4ED8</color>
+    <color name="gray_200">#E5E7EB</color>
+    <color name="gray_300">#D1D5DB</color>
+    <color name="gray_600">#4B5563</color>
+    <color name="border_gray">#374151</color>
+
+    <!-- Dialog Colors -->
+    <color name="text_primary_white">#FFFFFF</color>
+    <color name="text_secondary_gray">#9CA3AF</color>
 </resources>

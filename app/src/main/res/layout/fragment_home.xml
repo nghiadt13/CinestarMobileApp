@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    android:background="@android:color/transparent">
+    android:overScrollMode="never"
+    android:background="@color/brand_dark">
 
     <LinearLayout
         android:layout_width="match_parent"

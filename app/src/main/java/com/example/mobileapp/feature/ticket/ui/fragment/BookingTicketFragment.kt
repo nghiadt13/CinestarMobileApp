@@ -67,7 +67,10 @@ class BookingTicketFragment : Fragment() {
         binding.tvCinemaName.text = args.cinemaName
 
         binding.btnBook.setOnClickListener {
-            viewModel.createBooking()
+            // Navigate to Payment screen for testing UI
+            findNavController().navigate(R.id.action_bookingTicket_to_payment)
+            // TODO: Later integrate with actual booking flow
+            // viewModel.createBooking()
         }
     }
 

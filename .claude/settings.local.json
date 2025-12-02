@@ -9,7 +9,12 @@
       "Bash(.gradlew.bat assembleDebug)",
       "Bash(./gradlew.bat assembleDebug:*)",
       "Bash(echo:*)",
-      "Bash(cmd /c gradlew.bat assembleDebug)"
+      "Bash(cmd /c gradlew.bat assembleDebug)",
+      "Bash(nul)",
+      "Bash(mkdir:*)",
+      "Bash(./gradlew clean build:*)",
+      "Bash(./gradlew clean:*)",
+      "Bash(./gradlew build:*)"
     ],
     "deny": [],
     "ask": []

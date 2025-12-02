@@ -15,5 +15,7 @@ data class Cinema(
         val logoUrl: String = "",
         val distance: String? = null,
         val has2D: Boolean = true,
-        val hasSubtitle: Boolean = true
+        val hasSubtitle: Boolean = true,
+        val hasShowtimes: Boolean = true,
+        val message: String? = null
 )

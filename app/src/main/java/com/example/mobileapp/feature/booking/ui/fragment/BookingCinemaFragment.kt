@@ -34,9 +34,9 @@ class BookingCinemaFragment : Fragment() {
     private var selectedCinema: Cinema? = null
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View {
         _binding = FragmentBookingCinemaBinding.inflate(inflater, container, false)
         return binding.root
@@ -67,34 +67,34 @@ class BookingCinemaFragment : Fragment() {
 
         // Search
         binding.etSearch.addTextChangedListener(
-            object : TextWatcher {
-                override fun beforeTextChanged(
-                    s: CharSequence?,
-                    start: Int,
-                    count: Int,
-                    after: Int
-                ) {}
-                override fun onTextChanged(
-                    s: CharSequence?,
-                    start: Int,
-                    before: Int,
-                    count: Int
-                ) {}
-                override fun afterTextChanged(s: Editable?) {
-                    viewModel.setSearchQuery(s?.toString() ?: "")
+                object : TextWatcher {
+                    override fun beforeTextChanged(
+                            s: CharSequence?,
+                            start: Int,
+                            count: Int,
+                            after: Int
+                    ) {}
+                    override fun onTextChanged(
+                            s: CharSequence?,
+                            start: Int,
+                            before: Int,
+                            count: Int
+                    ) {}
+                    override fun afterTextChanged(s: Editable?) {
+                        viewModel.setSearchQuery(s?.toString() ?: "")
+                    }
                 }
-            }
         )
 
         // Continue button
         binding.btnContinue.setOnClickListener {
             selectedCinema?.let { cinema ->
-                val action = BookingCinemaFragmentDirections
-                    .actionBookingCinemaToBookingTicket(
-                        movieId = args.movieId,
-                        cinemaId = cinema.id,
-                        cinemaName = cinema.name
-                    )
+                val action =
+                        BookingCinemaFragmentDirections.actionBookingCinemaToBookingTicket(
+                                movieId = args.movieId,
+                                cinemaId = cinema.id,
+                                cinemaName = cinema.name
+                        )
                 findNavController().navigate(action)
             }
         }
@@ -137,9 +137,7 @@ class BookingCinemaFragment : Fragment() {
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.currentCity.collect { city ->
-                binding.tvCitySelector.text = city
-            }
+            viewModel.currentCity.collect { city -> binding.tvCitySelector.text = city }
         }
     }
 
@@ -181,8 +179,46 @@ class BookingCinemaFragment : Fragment() {
     }
 
     private fun onCinemaSelected(cinema: Cinema) {
+        if (!cinema.hasShowtimes) {
+            // Hiển thị dialog thông báo không có suất chiếu
+            showNoShowtimesDialog(cinema)
+            return
+        }
         selectedCinema = cinema
         updateContinueButton(true)
+    }
+
+    private fun showNoShowtimesDialog(cinema: Cinema) {
+        val message =
+                cinema.message
+                        ?: "Rất tiếc, hiện tại chưa có suất chiếu nào cho bộ phim này tại rạp ${cinema.name}. Vui lòng quay lại sau nhé!"
+
+        val dialog = android.app.Dialog(requireContext())
+        dialog.requestWindowFeature(android.view.Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.dialog_no_schedule)
+        dialog.window?.apply {
+            setBackgroundDrawable(
+                    android.graphics.drawable.ColorDrawable(android.graphics.Color.TRANSPARENT)
+            )
+            setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+            // Thêm padding cho dialog
+            decorView.setPadding(32, 0, 32, 0)
+        }
+
+        // Set message
+        dialog.findViewById<android.widget.TextView>(R.id.tvMessage)?.text = message
+
+        // Close button
+        dialog.findViewById<android.widget.ImageButton>(R.id.btnClose)?.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        // OK button
+        dialog.findViewById<android.widget.Button>(R.id.btnOk)?.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
     }
 
     private fun updateContinueButton(enabled: Boolean) {

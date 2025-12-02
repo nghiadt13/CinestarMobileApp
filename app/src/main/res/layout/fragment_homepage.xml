@@ -2,93 +2,101 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/brand_dark">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_horizontal_8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.08" />
-
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBarLayout"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/guideline_horizontal_8"
-        app:layout_constraintStart_toStartOf="parent"
+    <!-- Header Background -->
+    <View
+        android:id="@+id/headerBackground"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:background="@color/brand_dark"
+        android:elevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
-        >
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="8dp">
+    <!-- Avatar -->
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/imageView_avatar"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="16dp"
+        android:elevation="4dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/baymax"
+        app:layout_constraintBottom_toBottomOf="@id/headerBackground"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/headerBackground"
+        app:shapeAppearanceOverlay="@style/CircleImageView"
+        app:strokeColor="@color/brand_red_500"
+        app:strokeWidth="2dp" />
 
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/imageView_avatar"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/baymax"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:shapeAppearanceOverlay="@style/CircleImageView"
-                />
+    <!-- Logo -->
+    <ImageView
+        android:id="@+id/imageView_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="28dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/CinemasStar"
+        android:elevation="4dp"
+        android:src="@drawable/cgv"
+        app:layout_constraintBottom_toBottomOf="@id/headerBackground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/headerBackground" />
 
-            <ImageView
-                android:id="@+id/imageView_logo"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:adjustViewBounds="true"
-                android:contentDescription="@string/CinemasStar"
-                android:src="@drawable/cgv"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+    <!-- My Ticket Button -->
+    <ImageButton
+        android:id="@+id/imageButton_myTicket"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/ripple_circle"
+        android:contentDescription="@string/Ticket"
+        android:elevation="4dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/movie_ticket"
+        app:layout_constraintBottom_toBottomOf="@id/headerBackground"
+        app:layout_constraintEnd_toStartOf="@id/imageButton_setting"
+        app:layout_constraintTop_toTopOf="@id/headerBackground"
+        app:tint="@color/gray_400" />
 
-            <ImageButton
-                android:id="@+id/imageButton_myTicket"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="@string/Ticket"
-                android:scaleType="centerCrop"
-                android:src="@drawable/movie_ticket"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@id/imageButton_setting"
-                app:layout_constraintHorizontal_bias="0.729"
-                app:layout_constraintVertical_bias="0.666"
-                app:layout_constraintStart_toStartOf="@id/imageView_logo"
-                app:layout_constraintTop_toTopOf="parent"
-                />
+    <!-- Settings Button -->
+    <ImageButton
+        android:id="@+id/imageButton_setting"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/ripple_circle"
+        android:contentDescription="@string/setting"
+        android:elevation="4dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_setting2"
+        app:layout_constraintBottom_toBottomOf="@id/headerBackground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/headerBackground"
+        app:tint="@color/gray_400" />
 
-            <ImageButton
-                android:id="@+id/imageButton_setting"
-                android:contentDescription="@string/setting"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/ic_setting2"
-                android:paddingTop="8dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+    <!-- Header Divider -->
+    <View
+        android:id="@+id/headerDivider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/gray_800"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/headerBackground" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </com.google.android.material.appbar.AppBarLayout>
-
+    <!-- Content Container -->
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/home_content_container"
         android:name="com.example.mobileapp.feature.homepage.ui.fragment.HomeFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_8"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/headerDivider" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
